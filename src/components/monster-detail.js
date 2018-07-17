@@ -6,7 +6,7 @@ import StatChart from './monster-stat-chart'
 import StatList from './monster-stat-list'
 import StatBarChart from './monster-stat-barchart'
 
-// import Link from "gatsby-link"
+import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 
 // import presets from "../utils/presets"
@@ -73,6 +73,7 @@ class MonsterDetail extends React.Component {
       <div>
         <MonsterImage />
         <Container>
+          <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
           <h1 className={css`text-align: center;`}>{name}</h1>
           <div className={css`display:flex;`}>
             <section className={css`width:20rem;margin-right:1.25rem;`}>

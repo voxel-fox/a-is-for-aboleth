@@ -33,8 +33,10 @@ const SizeLabel = styled.label`
 
 const TypeLabel = styled.label`
   display: block;
+  width: 100%;
+  min-width: 4.5rem;
   max-width: 7.5rem;
-  margin: 0 .5rem;
+  padding: .5rem;
   text-align: center;
   ${activeLabel};
 `
