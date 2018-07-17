@@ -1,0 +1,75 @@
+{
+  "name": "gatsby-tome",
+  "private": true,
+  "description": "",
+  "version": "0.1.0",
+  "author": "Kara Todd <kara@voxel-fox.com>",
+  "dependencies": {
+    "emotion": "^9.2.3",
+    "emotion-server": "^9.2.3",
+    "gatsby": "^1.9.260",
+    "gatsby-image": "latest",
+    "gatsby-link": "latest",
+    "gatsby-plugin-emotion": "^1.1.17",
+    "gatsby-plugin-manifest": "latest",
+    "gatsby-plugin-offline": "^1.0.18",
+    "gatsby-plugin-react-helmet": "latest",
+    "gatsby-plugin-sharp": "^1.6.47",
+    "gatsby-plugin-svgr": "^1.0.0",
+    "gatsby-plugin-typography": "^1.7.18",
+    "gatsby-source-filesystem": "latest",
+    "gatsby-transformer-json": "latest",
+    "gatsby-transformer-sharp": "latest",
+    "memoize-one": "^3.1.1",
+    "prop-types": "^15.5.8",
+    "react": "^16.4.1",
+    "react-animations": "^1.0.0",
+    "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.3",
+    "react-helmet": "^5.2.0",
+    "react-typography": "^0.16.13",
+    "recharts": "^1.0.0-beta.10",
+    "slug": "^0.9.1",
+    "typeface-alegreya": "^0.0.54",
+    "typeface-alegreya-sans": "^0.0.54",
+    "typography": "^0.16.17"
+  },
+  "license": "",
+  "main": "n/a",
+  "scripts": {
+    "test": "standard && start-server-and-test develop http://localhost:8000 cy:run",
+    "develop": "gatsby develop",
+    "dev": "gatsby develop",
+    "build": "gatsby build",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "graphql"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "ignore": [
+      "**/node_modules/",
+      "/public/",
+      "/cypress/",
+      "tmp.js"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "cypress": "3.0.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "standard": "^11.0.1",
+    "start-server-and-test": "^1.1.4"
+  }
+}

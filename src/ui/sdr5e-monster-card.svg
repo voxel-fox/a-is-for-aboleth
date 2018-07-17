@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="227.39" height="338.51" viewBox="0 0 227.39 338.51">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Card_Edge" data-name="Card Edge" x="6.55" y="362.73" width="215.47" height="328.48" rx="12" ry="12" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Card_Edge-2" data-name="Card Edge" x="7.02" y="5.75" width="213.34" height="328.48" rx="12" ry="12" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect x="-3.38" y="1" width="234.15" height="293.38" rx="9" ry="9" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <path d="M190.45,267.93l13.8-7.7L218.47,268v15.84l-14,8.09-14.26-8.09Z" fill="red" stroke="#000" stroke-miterlimit="10"/>
+    </clipPath>
+  </defs>
+  <title>sdr5e-monster-card</title>
+  <g style="isolation: isolate">
+    <g id="Red_Dragon" data-name="Red Dragon">
+      <g id="Card">
+        <g id="Interior">
+          <g clip-path="url(#clip-path)">
+            <ellipse cx="113.95" cy="358.14" rx="38.05" ry="33.56"/>
+          </g>
+        </g>
+      </g>
+      <g id="Card-2" data-name="Card">
+        <rect id="Border_Color" data-name="Border Color" x="0.5" y="0.5" width="226.39" height="337.51" rx="5" ry="5" stroke="#000" stroke-miterlimit="10"/>
+        <g id="Interior-2" data-name="Interior">
+          <g clip-path="url(#clip-path-2)">
+            <rect id="Background_Color" data-name="Background Color" x="-8.47" y="-6.44" width="244.33" height="348" fill="#f2f2f2"/>
+            <g id="Image">
+              <g clip-path="url(#clip-path-3)">
+                <rect x="-4.94" y="-7.77" width="250" height="316.5" fill="#666" stroke="#000" stroke-miterlimit="10"/>
+                <g opacity="0.76" style="mix-blend-mode: hard-light">
+                  <image width="1358" height="1817" transform="translate(-9.98 4.68) scale(0.18)" xlink:href="sdr5e-monster-card1.png"/>
+                </g>
+                <g style="mix-blend-mode: darken">
+                  <image width="1358" height="1817" transform="translate(-11.06 3.77) scale(0.18)" xlink:href="sdr5e-monster-card2.png"/>
+                </g>
+                <rect x="-15.93" y="-10.77" width="277.83" height="324.94" fill="#afc1d6" style="mix-blend-mode: overlay"/>
+              </g>
+            </g>
+            <rect id="inner-border" x="14.43" y="14.36" width="198.52" height="274.37" fill="none" stroke="#000" stroke-miterlimit="10"/>
+            <g id="name">
+              <rect id="name_bg" data-name="name bg" x="0.57" y="292.98" width="222.25" height="41.91" fill="#f2f2f2" stroke="#000" stroke-miterlimit="10"/>
+              <text transform="translate(26.61 322.56) scale(1.09 1)" font-size="22.01" font-family="Alegreya-Regular, Alegreya"><tspan letter-spacing="-0.01em">A</tspan><tspan x="12.52" y="0">dult </tspan><tspan x="53.23" y="0" letter-spacing="-0.03em">R</tspan><tspan x="66.02" y="0">ed D</tspan><tspan x="107.52" y="0" letter-spacing="-0.01em">r</tspan><tspan x="115.73" y="0" letter-spacing="0em">agon</tspan></text>
+            </g>
+            <g id="size">
+              <ellipse cx="19.29" cy="282.78" rx="7.47" ry="7.5" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+              <text transform="translate(16.49 286.37) scale(0.93 1)" font-size="10.83" font-family="Alegreya-Black, Alegreya">L</text>
+            </g>
+            <g id="srd5e">
+              <g id="D20">
+                <path d="M190.45,267.93l13.8-7.7L218.47,268v15.84l-14,8.09-14.26-8.09Z" fill="red"/>
+                <g clip-path="url(#clip-path-4)">
+                  <path d="M214.89,279.28l-21,.08,10.3-15.08ZM204.24,260.5l-.06,3.78m13.73,4.1-13.73-4.1m13.73,4.1-3,10.9m3.31,4.46-3.31-4.46m-21,.08-2.68-11h0l13-4.1m-10.3,15.08-3.41,4.26m13.93,7.7-10.52-12m21-.08-10.49,12" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0.5" opacity="0.36" style="mix-blend-mode: multiply"/>
+                </g>
+                <path d="M190.45,267.93l13.8-7.7L218.47,268v15.84l-14,8.09-14.26-8.09Z" fill="none" stroke="#000" stroke-miterlimit="10"/>
+              </g>
+              <g>
+                <text transform="translate(201.41 283.84)" font-size="6" fill="#fff" font-family="Alegreya-Medium, Alegreya">5e</text>
+                <text transform="translate(197.92 277.1) scale(1.1 1)" font-size="6" fill="#fff" font-family="Alegreya-Medium, Alegreya">SRD</text>
+              </g>
+            </g>
+            <g id="dragon">
+              <circle cx="26.32" cy="24.48" r="15.25" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+              <image width="1280" height="1101" transform="translate(10.57 9.73) scale(0.02 0.03)" xlink:href="../../../_creativecommons/animal-2029670_1280.png"/>
+            </g>
+            <g id="cr">
+              <ellipse id="cr_background" data-name="cr background" cx="113.69" cy="1.15" rx="37.79" ry="33.56"/>
+              <text transform="translate(96.14 22.77) scale(0.85 1)" font-size="20.67" fill="#fff" font-family="Alegreya-Medium, Alegreya">XVII</text>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
