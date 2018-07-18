@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
-import CardGrid from '../components/card-grid'
+import TypeGrid from '../components/type-grid'
 
 class Index extends React.Component {
   static propTypes = {
@@ -14,9 +14,8 @@ class Index extends React.Component {
 
     return (
       <main>
-        <CardGrid
+        <TypeGrid
           cards={monsters.edges.map(e => e.node)}
-          limit={12}
         />
       </main>
     )
@@ -26,7 +25,7 @@ class Index extends React.Component {
 export default Index
 
 export const pageQuery = graphql`
-  query indexPage {
+  query monsterTypePage {
     monsters: allMonstersSrd5EJson {
       edges {
         node {
