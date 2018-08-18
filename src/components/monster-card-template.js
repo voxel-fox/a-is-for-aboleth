@@ -88,6 +88,7 @@ export const monsterCardFragment = graphql`
     name
     fields {
       slug
+      crValue
       cardImage {
         childImageSharp {
           ...MonsterCard_img

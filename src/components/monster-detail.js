@@ -13,7 +13,7 @@ import Img from 'gatsby-image'
 // import typography, { rhythm, scale } from "../utils/typography"
 
 const Container = styled.div`
-  max-width: 100rem;
+  max-width: 80rem;
   padding: 0 1.25rem;
   margin: 1.25rem auto;
 `
@@ -22,7 +22,12 @@ const Mast = styled.div`
   position: relative;
   height: 25rem;
   background: url(${texture});
+  overflow: hidden;
 `
+
+const InfoCardBox = styled.div`
+`
+
 const mastImgStyle = {
   position: 'absolute',
   left: 0,
@@ -64,21 +69,45 @@ class MonsterDetail extends React.Component {
     console.debug('monster', this.props.monster)
 
     const MonsterImage = () => (
-      <Mast className={css`object-fit: cover;`}>
+      <div className={css`position:absolute;top:0;left:0;right:0;bottom:0;`}>
         {image && (<Img sizes={{ ...image.sizes }} style={mastImgStyle} />)}
-      </Mast>
+      </div>
+    )
+
+    const InfoCard = () => (
+      <InfoCardBox>
+        <ul>
+          <li>
+            <b>Size</b>
+            <span>{size}</span>
+          </li>
+          <li>
+            <b>Type</b>
+            <span>{type}</span>
+          </li>
+          <li>
+            <b>Alignment</b>
+            <span>{alignment}</span>
+          </li>
+          <li>
+            <b>HP</b>
+            <span>{hp}</span>
+          </li>
+        </ul>
+      </InfoCardBox>
     )
 
     const MonsterDetails = () => (
       <div>
-        <MonsterImage />
+        <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
+
+        <Mast className={css`object-fit: cover;`}>
+          <MonsterImage />
+        </Mast>
+
         <Container>
-          <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
-          <h1 className={css`text-align: center;`}>{name}</h1>
+          <h1 className={css`margin-left:21.25rem;`}>{name}</h1>
           <div className={css`display:flex;`}>
-            <section className={css`width:20rem;margin-right:1.25rem;`}>
-              <h2 className={css`text-align: center;`}>Gallery</h2>
-            </section>
             <section className={css`width:20rem;margin-right:1.25rem;`}>
               <h2 className={css`text-align: center;`}>Ability Scores</h2>
               <div>
@@ -88,24 +117,7 @@ class MonsterDetail extends React.Component {
               </div>
             </section>
             <div>
-              <dl>
-                <div>
-                  <dt>Size</dt>
-                  <dd>{size}</dd>
-                </div>
-                <div>
-                  <dt>Type</dt>
-                  <dd>{type}</dd>
-                </div>
-                <div>
-                  <dt>Alignment</dt>
-                  <dd>{alignment}</dd>
-                </div>
-                <div>
-                  <dt>HP</dt>
-                  <dd>{hp}</dd>
-                </div>
-              </dl>
+              <InfoCard />
               <div className={css`max-width: 37.5rem;`}>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?</p>
                 <p>Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!</p>

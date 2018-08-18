@@ -9,6 +9,15 @@ const slugify = (text) => {
   return slug(text, {lower: true})
 }
 
+const crValue = (cr) => {
+  if (cr.indexOf('/') !== -1) {
+    const split = cr.split('/')
+    return 1 / ~~split[1]
+  } else {
+    return ~~cr
+  }
+}
+
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
@@ -22,6 +31,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 node {
                   name
                   type
+                  challenge_rating
                 }
               }
             }
@@ -78,6 +88,12 @@ exports.onCreateNode = ({ node, boundActionCreators }) => {
       node,
       name: `cardImage`,
       value: relative(data, image)
+    })
+
+    createNodeField({
+      node,
+      name: `crValue`,
+      value: crValue(node.challenge_rating)
     })
   }
 }

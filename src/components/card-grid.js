@@ -5,7 +5,9 @@ import memoize from 'memoize-one'
 import styled, { css, keyframes } from 'react-emotion'
 import { zoomInUp } from 'react-animations'
 
-import FilterList from './filter-list'
+import FilterMonsterByCR from './filter-monster-by-cr'
+import FilterMonsterBySize from './filter-monster-by-size'
+import FilterMonsterByType from './filter-monster-by-type'
 import MonsterCard from './monster-card-template'
 import texture from '../assets/images/dark-card-bg.jpg'
 import Button from './button'
@@ -15,6 +17,16 @@ const cardAnimation = keyframes`${zoomInUp}`
 const container = css`
   max-width: 100rem;
   margin: 1.25rem auto;
+`
+
+const FiltersBox = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: black;
+  z-index: 100;
 `
 
 const Grid = styled.div`
@@ -33,52 +45,54 @@ const GridItem = css`
 class CardGrid extends React.Component {
   static propTypes = {
     limit: PropTypes.number,
-    filterOptions: PropTypes.arrayOf(PropTypes.string),
     cards: PropTypes.array
   }
 
   static defaultProps = {
     limit: 12,
-    filterOptions: ['size', 'type'],
-    initialFilters: [],
+    sizeFilters: [],
+    typeFilters: [],
+    nameFilter: null,
+    crRange: {
+      min: 0,
+      max: 30
+    },
     cards: []
   }
 
   state = {
     cardLimit: this.props.limit,
-    activeFilters: {}
+    sizeFilters: this.props.sizeFilters,
+    typeFilters: this.props.typeFilters,
+    nameFilter: this.props.nameFilter,
+    crRange: this.props.crRange
   }
 
-  buildFilters = memoize(
-    (cards, filterOptions) => cards.reduce((options, card) => {
-      filterOptions.map((attr) => {
-        const values = options[attr] || []
-        options[attr] = (values.indexOf(card[attr]) === -1)
-          ? [ ...values, card[attr] ]
-          : values
-      })
-      return options
-    }, {})
-  )
-
-  validateCard = memoize(
-    (card, activeFilters) => Object
-      .keys(activeFilters)
-      .reduce((isValid, k) => {
-        const allowed = activeFilters[k].map((v) => v.toLowerCase())
-        return isValid && (allowed.length < 1 || (card[k] && allowed.includes(card[k].toLowerCase())))
-      }, true)
-  )
-
-  filterCards = memoize(
-    (cards, activeFilters) => {
-      return cards.filter((card) => this.validateCard(card, activeFilters))
+  filterByAttr = memoize(
+    (card, filters, attr) => {
+      const allowed = filters.map((v) => v.toLowerCase())
+      return allowed.length < 1 || (card[attr] && allowed.includes(card[attr].toLowerCase()))
     }
   )
 
-  filterChange (...args) {
-    const [{ name, active }, attr] = args
-    const currentFilters = this.state.activeFilters[attr] || []
+  filterByCR = memoize(
+    (card, crRange) => {
+      return card.fields.crValue >= crRange.min && card.fields.crValue <= crRange.max
+    }
+  )
+
+  filterCards = memoize(
+    (cards, sizeFilters, typeFilters, crRange) => {
+      return cards
+        .filter((card) => this.filterByAttr(card, sizeFilters, 'size'))
+        .filter((card) => this.filterByAttr(card, typeFilters, 'type'))
+        .filter((card) => this.filterByCR(card, crRange))
+    }
+  )
+
+  toggleFilter (...args) {
+    const [{ name, active }, filterName] = args
+    const currentFilters = this.state[filterName] || []
     let newFilters = currentFilters
 
     // Add filter to list
@@ -92,33 +106,17 @@ class CardGrid extends React.Component {
     }
 
     if (newFilters !== currentFilters) {
-      this.setState({ activeFilters: {
-        ...this.state.activeFilters,
-        [attr]: newFilters
-      }})
+      this.setState({ [filterName]: newFilters })
     }
   }
 
   render () {
-    const { cards, filterOptions, limit } = this.props
-    const { activeFilters, cardLimit } = this.state
-    const filters = this.buildFilters(cards, filterOptions)
-    const deck = this.filterCards(cards, activeFilters)
+    const { cards, limit } = this.props
+    const { sizeFilters, typeFilters, crRange, cardLimit } = this.state
+    const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange)
 
     return (
-      <div className={css`background: url(${texture});`}>
-        <div className={container}>
-          {Object.keys(filters).map((attr) => (
-            <FilterList
-              key={`filter-${attr}`}
-              listType={attr}
-              items={filters[attr]}
-              active={activeFilters[attr] || []}
-              onHandleToggle={(...args) => this.filterChange(...args, attr)}
-            />
-          ))}
-        </div>
-
+      <div className={css`overflow:hidden;background:url(${texture});`}>
         <Grid>
           {deck
             .slice(0, cardLimit)
@@ -144,6 +142,26 @@ class CardGrid extends React.Component {
             />
           </div>
         )}
+
+        <FiltersBox>
+          <div className={container}>
+            <FilterMonsterByCR
+              onValueChange={(range) => {
+                this.setState({
+                  crRange: range
+                })
+              }}
+            />
+            <FilterMonsterBySize
+              active={sizeFilters || []}
+              onHandleToggle={(...args) => this.toggleFilter(...args, 'sizeFilters')}
+            />
+          </div>
+          <FilterMonsterByType
+            active={typeFilters || []}
+            onHandleToggle={(...args) => this.toggleFilter(...args, 'typeFilters')}
+          />
+        </FiltersBox>
       </div>
     )
   }

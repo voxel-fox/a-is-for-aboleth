@@ -5,6 +5,9 @@ import MonsterTypeBadge from './monster-type-badge'
 import { rem } from '../utils/helpers'
 
 const ListBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(90deg, rgba(0,0,0,0.00) 0%, rgba(77,77,77,0.80) 27.5%, rgba(77,77,77,0.80) 82.5%, rgba(0,0,0,0.00) 100%);
 `
 
@@ -12,6 +15,7 @@ const ItemList = styled.ul`
   display: flex;
   list-style: none;
   overflow-x: auto;
+  padding: 0 ${rem(110)};
   margin: 0;
 `
 
@@ -25,20 +29,6 @@ const activeLabel = (props) => css`
   opacity: ${props.active ? 1 : 0.5};
 `
 
-const SizeLabel = styled.label`
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
-  background: black;
-  border: .1rem solid white;
-  border-radius: 100%;
-  color: white;
-  text-transform: uppercase;
-  ${activeLabel};
-`
-
 const TypeLabel = styled.label`
   display: block;
   width: ${rem(90)};
@@ -48,7 +38,7 @@ const TypeLabel = styled.label`
   ${activeLabel};
 `
 
-class FilterList extends React.Component {
+class FilterMonsterByType extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.string),
     active: PropTypes.arrayOf(PropTypes.string),
@@ -56,7 +46,22 @@ class FilterList extends React.Component {
   }
 
   static defaultProps = {
-    items: [],
+    items: [
+      'Abberation',
+      'Beast',
+      'Celestial',
+      'Construct',
+      'Dragon',
+      'Elemental',
+      'Fey',
+      'Fiend',
+      'Giant',
+      'Humanoid',
+      'Monstrosity',
+      'Ooze',
+      'Plant',
+      'Undead'
+    ],
     active: []
   }
 
@@ -73,7 +78,7 @@ class FilterList extends React.Component {
   }
 
   render () {
-    const { items, active, listType } = this.props
+    const { items, active } = this.props
 
     const filterInputToggle = (name, isActive) => (
       <input
@@ -85,18 +90,11 @@ class FilterList extends React.Component {
       />
     )
 
-    const sizeFilterItem = (name, isActive) => (
-      <SizeLabel active={isActive}>
-        {filterInputToggle(name)}
-        <abbr title={name}>{name.charAt(0)}</abbr>
-      </SizeLabel>
-    )
-
-    const typeFilterItem = (name, isActive) => (
+    const filterItem = (name, isActive) => (
       <TypeLabel active={isActive}>
         {filterInputToggle(name, isActive)}
         <MonsterTypeBadge
-          type={name}
+          type={name.toLowerCase()}
           svgAttrs={{width: '100%'}}
           bgAttrs={{stroke: '#000', fill: 'none'}}
           iconAttrs={{fill: '#fff'}}
@@ -105,41 +103,21 @@ class FilterList extends React.Component {
       </TypeLabel>
     )
 
-    const TypeFilterList = (items) => (
-      <ListBox className={css`padding: 0 ${rem(110)};`}>
+    return (
+      <ListBox>
         <ItemList>
           {items.map((name) => {
             const isActive = active.indexOf(name) !== -1
             return (
               <li key={`filter-${name}`}>
-                {typeFilterItem(name, isActive)}
+                {filterItem(name, isActive)}
               </li>
             )
           })}
         </ItemList>
       </ListBox>
     )
-
-    const SizeFilterList = (items) => (
-      <ItemList>
-        {items.map((name) => {
-          const isActive = active.indexOf(name) !== -1
-          return (
-            <li key={`filter-${name}`}>
-              {sizeFilterItem(name, isActive)}
-            </li>
-          )
-        })}
-      </ItemList>
-    )
-
-    return (
-      <div>
-        {listType === 'type' && TypeFilterList(items)}
-        {listType === 'size' && SizeFilterList(items)}
-      </div>
-    )
   }
 }
 
-export default FilterList
+export default FilterMonsterByType
