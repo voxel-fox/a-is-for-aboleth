@@ -4,6 +4,7 @@ import memoize from 'memoize-one'
 
 import styled, { css, keyframes } from 'react-emotion'
 import { zoomInUp } from 'react-animations'
+import InfiniteScroll from 'react-infinite-scroller'
 
 import FilterMonsterByCR from './filter-monster-by-cr'
 import FilterMonsterBySize from './filter-monster-by-size'
@@ -44,12 +45,12 @@ const GridItem = css`
 
 class CardGrid extends React.Component {
   static propTypes = {
-    limit: PropTypes.number,
+    perPage: PropTypes.number,
     cards: PropTypes.array
   }
 
   static defaultProps = {
-    limit: 12,
+    perPage: 12,
     sizeFilters: [],
     typeFilters: [],
     nameFilter: null,
@@ -61,7 +62,7 @@ class CardGrid extends React.Component {
   }
 
   state = {
-    cardLimit: this.props.limit,
+    cardLimit: this.props.perPage,
     sizeFilters: this.props.sizeFilters,
     typeFilters: this.props.typeFilters,
     nameFilter: this.props.nameFilter,
@@ -110,38 +111,68 @@ class CardGrid extends React.Component {
     }
   }
 
+  loadMore (page) {
+    const { perPage } = this.props
+    const { cardLimit } = this.state
+
+    this.setState({
+      cardLimit: cardLimit + (perPage * page)
+    })
+  }
+
   render () {
-    const { cards, limit } = this.props
+    const { cards, perPage } = this.props
     const { sizeFilters, typeFilters, crRange, cardLimit } = this.state
     const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange)
 
+    // const loadButton = (
+    //   <div className={css`display:flex;align-items:center;`}>
+    //     <Button
+    //       data-testid='load-more'
+    //       label='More Monsters'
+    //       onClick={() => {
+    //         this.setState({
+    //           cardLimit: cardLimit + perPage
+    //         })
+    //       }}
+    //     />
+    //   </div>
+    // )
+
     return (
       <div className={css`overflow:hidden;background:url(${texture});`}>
-        <Grid>
-          {deck
-            .slice(0, cardLimit)
-            .map(card => (
-              <MonsterCard
-                key={`monster-${card.fields.slug}`}
-                className={GridItem}
-                monster={card}
-              />
-            ))}
-        </Grid>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.loadMore.bind(this)}
+          hasMore={deck.length > cardLimit}
+          loader={<div key={0}>Loading &hellip;</div>}
+        >
+          <Grid>
+            {deck
+              .slice(0, cardLimit)
+              .map(card => (
+                <MonsterCard
+                  key={`monster-${card.fields.slug}`}
+                  className={GridItem}
+                  monster={card}
+                />
+              ))}
+          </Grid>
+        </InfiniteScroll>
 
-        {deck.length > cardLimit && (
+        {/* {deck.length > cardLimit && (
           <div className={css`display:flex;align-items:center;`}>
             <Button
               data-testid='load-more'
               label='More Monsters'
               onClick={() => {
                 this.setState({
-                  cardLimit: cardLimit + limit
+                  cardLimit: cardLimit + perPage
                 })
               }}
             />
           </div>
-        )}
+        )} */}
 
         <FiltersBox>
           <div className={container}>

@@ -16,7 +16,7 @@ class Index extends React.Component {
       <main>
         <CardGrid
           cards={monsters.edges.map(e => e.node)}
-          limit={12}
+          perPage={12}
         />
       </main>
     )
