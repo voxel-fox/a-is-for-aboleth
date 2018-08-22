@@ -3,15 +3,16 @@ import React from 'react'
 import memoize from 'memoize-one'
 
 import styled, { css, keyframes } from 'react-emotion'
+import { rem } from '../utils/helpers'
 import { zoomInUp } from 'react-animations'
 import InfiniteScroll from 'react-infinite-scroller'
+import SearchInput, { createFilter } from 'react-search-input'
 
 import FilterMonsterByCR from './filter-monster-by-cr'
 import FilterMonsterBySize from './filter-monster-by-size'
 import FilterMonsterByType from './filter-monster-by-type'
 import MonsterCard from './monster-card-template'
 import texture from '../assets/images/dark-card-bg.jpg'
-import Button from './button'
 
 const cardAnimation = keyframes`${zoomInUp}`
 
@@ -53,7 +54,7 @@ class CardGrid extends React.Component {
     perPage: 12,
     sizeFilters: [],
     typeFilters: [],
-    nameFilter: null,
+    nameFilter: '',
     crRange: {
       min: 0,
       max: 30
@@ -83,8 +84,9 @@ class CardGrid extends React.Component {
   )
 
   filterCards = memoize(
-    (cards, sizeFilters, typeFilters, crRange) => {
+    (cards, sizeFilters, typeFilters, crRange, nameFilter) => {
       return cards
+        .filter(createFilter(nameFilter, ['name']))
         .filter((card) => this.filterByAttr(card, sizeFilters, 'size'))
         .filter((card) => this.filterByAttr(card, typeFilters, 'type'))
         .filter((card) => this.filterByCR(card, crRange))
@@ -92,8 +94,8 @@ class CardGrid extends React.Component {
   )
 
   toggleFilter (...args) {
-    const [{ name, active }, filterName] = args
-    const currentFilters = this.state[filterName] || []
+    const [{ name, active }, filterType] = args
+    const currentFilters = this.state[filterType] || []
     let newFilters = currentFilters
 
     // Add filter to list
@@ -107,43 +109,24 @@ class CardGrid extends React.Component {
     }
 
     if (newFilters !== currentFilters) {
-      this.setState({ [filterName]: newFilters })
+      this.setState({ [filterType]: newFilters })
     }
   }
 
-  loadMore (page) {
-    const { perPage } = this.props
-    const { cardLimit } = this.state
-
-    this.setState({
-      cardLimit: cardLimit + (perPage * page)
-    })
-  }
-
   render () {
-    const { cards, perPage } = this.props
-    const { sizeFilters, typeFilters, crRange, cardLimit } = this.state
-    const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange)
-
-    // const loadButton = (
-    //   <div className={css`display:flex;align-items:center;`}>
-    //     <Button
-    //       data-testid='load-more'
-    //       label='More Monsters'
-    //       onClick={() => {
-    //         this.setState({
-    //           cardLimit: cardLimit + perPage
-    //         })
-    //       }}
-    //     />
-    //   </div>
-    // )
+    const { cards } = this.props
+    const { sizeFilters, typeFilters, crRange, cardLimit, nameFilter } = this.state
+    const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange, nameFilter)
 
     return (
-      <div className={css`overflow:hidden;background:url(${texture});`}>
+      <div className={css`overflow:hidden;min-height:100vh;background:url(${texture});`}>
         <InfiniteScroll
           pageStart={0}
-          loadMore={this.loadMore.bind(this)}
+          loadMore={(page) => {
+            this.setState({
+              cardLimit: this.state.cardLimit + (this.props.perPage * page)
+            })
+          }}
           hasMore={deck.length > cardLimit}
           loader={<div key={0}>Loading &hellip;</div>}
         >
@@ -160,33 +143,46 @@ class CardGrid extends React.Component {
           </Grid>
         </InfiniteScroll>
 
-        {/* {deck.length > cardLimit && (
-          <div className={css`display:flex;align-items:center;`}>
-            <Button
-              data-testid='load-more'
-              label='More Monsters'
-              onClick={() => {
-                this.setState({
-                  cardLimit: cardLimit + perPage
-                })
-              }}
-            />
-          </div>
-        )} */}
-
         <FiltersBox>
-          <div className={container}>
-            <FilterMonsterByCR
-              onValueChange={(range) => {
-                this.setState({
-                  crRange: range
-                })
-              }}
-            />
-            <FilterMonsterBySize
-              active={sizeFilters || []}
-              onHandleToggle={(...args) => this.toggleFilter(...args, 'sizeFilters')}
-            />
+          <div className={css`${container};margin:0 auto;`}>
+            <div className={css`
+              display: flex;
+              align-items: flex-end;
+              justify-content: space-between;
+              max-width: ${rem(1300)};
+              margin: 0 auto;
+              padding: 0 ${rem(20)};
+            `}>
+              <SearchInput
+                inputClassName={css`
+                  background:transparent;
+                  color:white;
+                  border:0;
+                  border-bottom:1px solid rgba(255,255,255, 0.7);
+                  width:${rem(340)};
+                  max-width: 100%;
+                  padding:0 ${rem(10)};
+                  margin-bottom:${rem(20)};
+                `}
+                placeholder={'Filter By Name'}
+                onChange={(nameFilter) => {
+                  this.setState({
+                    nameFilter: nameFilter
+                  })
+                }}
+              />
+              <FilterMonsterByCR
+                onValueChange={(range) => {
+                  this.setState({
+                    crRange: range
+                  })
+                }}
+              />
+              <FilterMonsterBySize
+                active={sizeFilters || []}
+                onHandleToggle={(...args) => this.toggleFilter(...args, 'sizeFilters')}
+              />
+            </div>
           </div>
           <FilterMonsterByType
             active={typeFilters || []}

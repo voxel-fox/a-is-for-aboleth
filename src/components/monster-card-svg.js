@@ -26,9 +26,9 @@ const IconSR5e = () => (
     <path d='M.79 8.28L14.58.57l14.23 7.75v15.83l-14 8.1-14.3-8.1z' fill='red' />
     <path d='M25.22 19.63l-21 .08L14.51 4.62zM14.57.85l-.06 3.77m13.74 4.1l-13.74-4.1m13.74 4.1l-3 10.91m3.31 4.45l-3.31-4.45m-21 .08l-2.68-11 13-4.1M4.21 19.71L.8 24m13.93 7.71l-10.52-12m21-.08l-10.49 12' fill='none' stroke='#000' strokeMiterlimit='10' strokeWidth='.5' opacity='.36' style={{mixBlendMode: 'multiply'}} />
     <path d='M.79 8.28L14.58.57l14.23 7.75v15.83l-14 8.1-14.3-8.1z' fill='none' stroke='#000' strokeMiterlimit='10' />
-    <g id='srd5-icon' fontSize='6' fill='#fff' fontFamily='Alegreya-Medium, Alegreya'>
-      <text transform='translate(11.75 24.18)'>5e</text>
-      <text transform='matrix(1.1 0 0 1 8.26 17.44)'>SRD</text>
+    <g id='srd5-icon' fill='#fff' fontFamily='Alegreya-Medium, Alegreya'>
+      <text fontSize='18' transform='matrix(1.1001 0 0 1 10.4997 21.1665)'>5</text>
+      <text fontSize='8' transform='matrix(1.1001 0 0 1 19.0833 22.7516)'>e</text>
     </g>
   </svg>
 )

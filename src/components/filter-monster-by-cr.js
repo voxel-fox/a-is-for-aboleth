@@ -9,6 +9,10 @@ import 'rc-slider/assets/index.css'
 const RangeCustom = createSliderWithTooltip(Range)
 
 class FilterMonsterByCR extends React.Component {
+  static propTypes = {
+    onValueChange: PropTypes.func
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -20,6 +24,10 @@ class FilterMonsterByCR extends React.Component {
 
   onChange (values) {
     const [min, max] = values
+
+    this.setState({
+      value: values
+    })
 
     this.props.onValueChange({
       'min': this.getRealValue(min),
@@ -52,22 +60,40 @@ class FilterMonsterByCR extends React.Component {
   }
 
   render () {
-    const marks = {
-      0: 0,
-      33: 30
-    }
+    const [min, max] = this.state.value
 
     return (
-      <RangeCustom
-        className={css`margin:${rem(20)};max-width:calc(100% - ${rem(40)});`}
-        min={0}
-        max={33}
-        marks={marks}
-        allowCross={false}
-        defaultValue={[0, 33]}
-        onChange={(value) => this.onChange(value)}
-        tipFormatter={(value) => this.toolTip(value)}
-      />
+      <div className={css`max-width:100%;width:${rem(340)};overflow:visible;`}>
+        <p className={css`text-align:center;margin:0 0 ${rem(-15)} 0;color:#999;`}>
+          {/* <span className={css`display:block;`}>Challenge Rating (CR)</span>
+          <span className={css`display:block;`}>{this.tooltip(min)} - {this.tooltip(max)}</span> */}
+          <abbr title='Challenge Rating'>CR</abbr>: {this.tooltip(min)} - {this.tooltip(max)}
+        </p>
+        <RangeCustom
+          className={css`margin:${rem(20)};max-width:calc(100% - ${rem(40)});`}
+          min={0}
+          max={33}
+          allowCross={false}
+          defaultValue={[0, 33]}
+          onChange={(value) => this.onChange(value)}
+          tipFormatter={(value) => this.toolTip(value)}
+          tipProps={{
+            placement: 'bottom',
+            prefixCls: 'rc-slider-tooltip'
+          }}
+          handleStyle={[{
+            border: 0,
+            height: 18,
+            width: 18,
+            marginLeft: -9,
+            marginTop: -6,
+            backgroundColor: '#D8D8D8',
+            boxShadow: '0 2px 4px 1px rgba(0,0,0,0.50)'
+          }]}
+          railStyle={{ backgroundColor: '#666666', height: 3 }}
+          trackStyle={[{ backgroundColor: '#CACACA', height: 3 }]}
+        />
+      </div>
     )
   }
 }
