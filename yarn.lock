@@ -5018,9 +5018,9 @@ gatsby-plugin-emotion@^1.1.17:
   dependencies:
     babel-runtime "^6.26.0"
 
-gatsby-plugin-manifest@latest:
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-1.0.26.tgz#50df00eb2893b4960215154fa19f7eff38398fb8"
+gatsby-plugin-manifest@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-1.0.27.tgz#148327ebfaf9a0a6791012cc5b5363356ee16ddf"
   dependencies:
     babel-runtime "^6.26.0"
     bluebird "^3.5.0"
@@ -5045,7 +5045,7 @@ gatsby-plugin-page-creator@^1.0.1:
     parse-filepath "^1.0.1"
     slash "^1.0.0"
 
-gatsby-plugin-react-helmet@latest:
+gatsby-plugin-react-helmet@^2.0.11:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-2.0.11.tgz#a2db81755f5b41d54e0e535ca1d9a008d3ccff0a"
   dependencies:

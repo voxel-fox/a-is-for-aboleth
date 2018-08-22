@@ -46,6 +46,7 @@ class MonsterCard extends React.Component {
         size,
         type,
         cr,
+        alignment,
         fields: {
           slug,
           cardImage
@@ -65,6 +66,22 @@ class MonsterCard extends React.Component {
           {image && (<Img sizes={{ ...image.sizes }} />)}
         </CardImage>
         {CardSvg({ name, size, type, cr })}
+
+        <script type='application/ld+json'>
+          {JSON.stringify({
+            '@context': 'http://schema.org/',
+            '@type': 'Game',
+            'name': 'System Reference Document 5.1 ("SRD5")',
+            'character': {
+              '@type': 'Person/Monster',
+              'name': {name},
+              'type': {type},
+              'challenge_rating': {cr},
+              'size': {size},
+              'alignment': {alignment}
+            }
+          })}
+        </script>
       </Link>
     )
   }

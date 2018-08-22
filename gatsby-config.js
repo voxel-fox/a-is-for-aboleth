@@ -13,6 +13,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-transformer-json`,
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -26,9 +27,9 @@ module.exports = {
         viewBox: false
         // see https://github.com/smooth-code/svgr for a list of all options
       }
-    }
-    // `gatsby-plugin-manifest`,
-    // `gatsby-plugin-offline`,
+    },
+    `gatsby-plugin-manifest`,
+    `gatsby-plugin-offline`
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {

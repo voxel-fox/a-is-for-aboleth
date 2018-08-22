@@ -153,6 +153,20 @@ export const MonsterDetailFragment = graphql`
     type
     subtype
     alignment
+    hit_dice
+    speed
+    special_abilities {
+      name
+      desc
+    }
+    actions {
+      name
+      desc
+    }
+    legendary_actions {
+      name
+      desc
+    }
     ac: armor_class
     hp: hit_points
     cr: challenge_rating
