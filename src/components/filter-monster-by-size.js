@@ -14,11 +14,14 @@ const sizes = {
 
 const ItemList = styled.ul`
   display: flex;
-  height: ${rem(70)};
   align-items: flex-end;
   list-style: none;
   margin: 0;
   overflow: visible;
+
+  @media (min-width: ${rem(650)}) {
+    height: ${rem(70)};
+  }
 `
 
 const ItemToggle = css`

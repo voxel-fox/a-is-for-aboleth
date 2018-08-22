@@ -64,13 +64,13 @@ class FilterMonsterByCR extends React.Component {
 
     return (
       <div className={css`max-width:100%;width:${rem(340)};overflow:visible;`}>
-        <p className={css`text-align:center;margin:0 0 ${rem(-15)} 0;color:#999;`}>
+        <p className={css`text-align:center;margin:0 0 ${rem(-5)} 0;color:#999;`}>
           {/* <span className={css`display:block;`}>Challenge Rating (CR)</span>
           <span className={css`display:block;`}>{this.tooltip(min)} - {this.tooltip(max)}</span> */}
           <abbr title='Challenge Rating'>CR</abbr>: {this.tooltip(min)} - {this.tooltip(max)}
         </p>
         <RangeCustom
-          className={css`margin:${rem(20)};max-width:calc(100% - ${rem(40)});`}
+          className={css`margin:${rem(10)};max-width:calc(100% - ${rem(20)});`}
           min={0}
           max={33}
           allowCross={false}

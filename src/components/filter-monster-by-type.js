@@ -15,8 +15,13 @@ const ItemList = styled.ul`
   display: flex;
   list-style: none;
   overflow-x: auto;
-  padding: 0 ${rem(110)};
+  padding: ${rem(8)} ${rem(20)};
   margin: 0;
+
+  @media (min-width: ${rem(650)}) {
+    padding-left: ${rem(80)};
+    padding-right: ${rem(80)};
+  }
 `
 
 const ItemToggle = css`

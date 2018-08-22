@@ -21,14 +21,35 @@ const container = css`
   margin: 1.25rem auto;
 `
 
+const filterBoxToggle = (props) => css`
+  height: ${props.open ? 'auto' : '52px'};
+  width: ${props.open ? '100%' : '52px'};
+`
+
 const FiltersBox = styled.div`
   position: fixed;
   bottom: 0;
-  left: 0;
   right: 0;
-  width: 100%;
   background: black;
   z-index: 100;
+  ${filterBoxToggle}
+`
+
+const FiltersList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: ${rem(1300)};
+  margin: 0 auto;
+  padding: ${rem(20)};
+
+  @media (min-width: ${rem(650)}) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 ${rem(20)};
+  }
 `
 
 const Grid = styled.div`
@@ -63,6 +84,7 @@ class CardGrid extends React.Component {
   }
 
   state = {
+    showFilters: true,
     cardLimit: this.props.perPage,
     sizeFilters: this.props.sizeFilters,
     typeFilters: this.props.typeFilters,
@@ -115,7 +137,7 @@ class CardGrid extends React.Component {
 
   render () {
     const { cards } = this.props
-    const { sizeFilters, typeFilters, crRange, cardLimit, nameFilter } = this.state
+    const { sizeFilters, typeFilters, crRange, cardLimit, nameFilter, showFilters } = this.state
     const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange, nameFilter)
 
     return (
@@ -143,16 +165,16 @@ class CardGrid extends React.Component {
           </Grid>
         </InfiniteScroll>
 
-        <FiltersBox>
+        <FiltersBox open={showFilters}>
+          <button
+            className={css`color:white;`}
+            onClick={() => {
+              this.setState({
+                showFilters: !showFilters
+              })
+            }}>{showFilters ? 'close' : 'open'}</button>
           <div className={css`${container};margin:0 auto;`}>
-            <div className={css`
-              display: flex;
-              align-items: flex-end;
-              justify-content: space-between;
-              max-width: ${rem(1300)};
-              margin: 0 auto;
-              padding: 0 ${rem(20)};
-            `}>
+            <FiltersList>
               <SearchInput
                 inputClassName={css`
                   background:transparent;
@@ -182,7 +204,7 @@ class CardGrid extends React.Component {
                 active={sizeFilters || []}
                 onHandleToggle={(...args) => this.toggleFilter(...args, 'sizeFilters')}
               />
-            </div>
+            </FiltersList>
           </div>
           <FilterMonsterByType
             active={typeFilters || []}

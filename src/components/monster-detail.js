@@ -66,8 +66,6 @@ class MonsterDetail extends React.Component {
       { attr: 'Charisma', label: 'CHA', value: cha }
     ]
 
-    console.debug('monster', this.props.monster)
-
     const MonsterImage = () => (
       <div className={css`position:absolute;top:0;left:0;right:0;bottom:0;`}>
         {image && (<Img sizes={{ ...image.sizes }} style={mastImgStyle} />)}

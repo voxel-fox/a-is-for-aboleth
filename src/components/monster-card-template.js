@@ -4,13 +4,18 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import styled, { css } from 'react-emotion'
 import CardSvg from './monster-card-svg'
+import { rem } from '../utils/helpers'
 
 const CardBase = css`
   display: block;
   position: relative;
-  width: 16rem;
+  width: ${rem(144)};
   overflow: hidden;
   border-radius: .5rem;
+
+  @media (min-width: ${rem(650)}) {
+    width: ${rem(20)};
+  }
 `
 
 const CardImage = styled.div`
