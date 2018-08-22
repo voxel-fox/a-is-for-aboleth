@@ -28,7 +28,18 @@ module.exports = {
         // see https://github.com/smooth-code/svgr for a list of all options
       }
     },
-    `gatsby-plugin-manifest`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'A is for Aboleth',
+        short_name: 'AisforAboleth',
+        start_url: '/',
+        background_color: '#000000',
+        theme_color: '#ffffff',
+        display: 'minimal-ui',
+        icon: 'src/assets/images/icon.png'
+      }
+    },
     `gatsby-plugin-offline`
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
