@@ -14,7 +14,7 @@ const CardBase = css`
   border-radius: .5rem;
 
   @media (min-width: ${rem(650)}) {
-    width: ${rem(20)};
+    width: ${rem(200)};
   }
 `
 
