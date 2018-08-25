@@ -17,7 +17,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
+        omitGoogleFont: true,
         pathToConfigModule: `src/utils/typography`
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Alegreya Sans:400', 'Alegreya:400,500,900']
+        }
       }
     },
     {

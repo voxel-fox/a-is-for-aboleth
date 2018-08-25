@@ -17,6 +17,7 @@
     "gatsby-plugin-sharp": "^1.6.47",
     "gatsby-plugin-svgr": "^1.0.0",
     "gatsby-plugin-typography": "^1.7.18",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "latest",
     "gatsby-transformer-json": "latest",
     "gatsby-transformer-sharp": "latest",
@@ -33,6 +34,7 @@
     "react-search-input": "^0.11.3",
     "react-typography": "^0.16.13",
     "recharts": "^1.0.0-beta.10",
+    "serve": "^10.0.0",
     "slug": "^0.9.1",
     "typeface-alegreya": "^0.0.54",
     "typeface-alegreya-sans": "^0.0.54",
@@ -45,8 +47,7 @@
     "develop": "gatsby develop",
     "dev": "gatsby develop",
     "build": "gatsby build",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "start": "serve public/"
   },
   "standard": {
     "parser": "babel-eslint",

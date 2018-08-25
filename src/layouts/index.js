@@ -1,7 +1,8 @@
 import React from 'react'
 import { injectGlobal } from 'emotion'
-import 'typeface-alegreya'
-import 'typeface-alegreya-sans'
+
+// import 'typeface-alegreya'
+// import 'typeface-alegreya-sans'
 
 injectGlobal`
   body {
