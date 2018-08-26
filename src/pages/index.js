@@ -1,9 +1,16 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
+import { graphql } from 'gatsby'
 import CardGrid from '../components/card-grid'
 import Helmet from 'react-helmet'
-import { css } from 'react-emotion'
+import { injectGlobal, css } from 'react-emotion'
 import { rem } from '../utils/helpers'
+
+injectGlobal`
+  body {
+    background: black;
+  }
+`
 
 class Index extends React.Component {
   static propTypes = {
@@ -41,7 +48,7 @@ class Index extends React.Component {
 export default Index
 
 export const pageQuery = graphql`
-  query indexPage {
+  query {
     monsters: allMonstersSrd5EJson {
       edges {
         node {

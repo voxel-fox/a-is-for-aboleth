@@ -6,7 +6,7 @@ import StatChart from './monster-stat-chart'
 import StatList from './monster-stat-list'
 import StatBarChart from './monster-stat-barchart'
 
-import Link from 'gatsby-link'
+import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 // import presets from "../utils/presets"
@@ -68,7 +68,7 @@ class MonsterDetail extends React.Component {
 
     const MonsterImage = () => (
       <div className={css`position:absolute;top:0;left:0;right:0;bottom:0;`}>
-        {image && (<Img sizes={{ ...image.sizes }} style={mastImgStyle} />)}
+        {image && (<Img fluid={{ ...image.fluid }} style={mastImgStyle} />)}
       </div>
     )
 
@@ -136,13 +136,12 @@ export default MonsterDetail
 
 export const MonsterDetailFragment = graphql`
   fragment MonsterMast_img on ImageSharp {
-    sizes: sizes(
+    fluid: fluid(
       maxWidth: 1600
       maxHeight: 400
       quality: 80
-      traceSVG: { background: "#27282C", color: "#000000" }
     ) {
-      ...GatsbyImageSharpSizes_tracedSVG
+      ...GatsbyImageSharpFluid_withWebp
     }
   }
   fragment MonsterFields on MonstersSrd5EJson {

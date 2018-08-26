@@ -18,8 +18,8 @@ const crValue = (cr) => {
   }
 }
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     resolve(
@@ -61,8 +61,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   })
 }
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions
 
   if (node.internal.type === `MonstersSrd5EJson`) {
     const data = _resolve(__dirname, './data/')
