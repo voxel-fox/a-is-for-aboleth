@@ -5,6 +5,7 @@ import Img from 'gatsby-image'
 import styled, { css } from 'react-emotion'
 import CardSvg from './monster-card-svg'
 import { rem } from '../utils/helpers'
+import placholder from '../assets/images/unknown-card.svg'
 
 const CardBase = css`
   display: block;
@@ -60,7 +61,6 @@ class MonsterCard extends React.Component {
     } = this.props
 
     const image = cardImage && cardImage.childImageSharp
-    console.debug('image', ...image.fluid)
 
     return (
       <Link
@@ -68,7 +68,7 @@ class MonsterCard extends React.Component {
         to={`/${slug}/`}
       >
         <CardImage>
-          {image && (<Img fluid={{ ...image.fluid }} />)}
+          {image && (<Img fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }} />)}
         </CardImage>
         {CardSvg({ name, size, type, cr })}
 
