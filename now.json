@@ -1,10 +1,8 @@
 {
   "name": "a-is-for-aboleth",
-  "type": "npm",
+  "type": "static",
+  "public": true,
   "alias": [
     "a-is-for-aboleth.now.sh"
-  ],
-  "engines": {
-    "node": "^9.0.0"
-  }
+  ]
 }
