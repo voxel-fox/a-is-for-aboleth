@@ -7,10 +7,13 @@ import { rem } from '../utils/helpers'
 import { zoomInUp } from 'react-animations'
 import InfiniteScroll from 'react-infinite-scroller'
 import SearchInput, { createFilter } from 'react-search-input'
+import { ReactComponent as FilterIcon } from '../assets/images/filter-icon.svg'
+import { ReactComponent as CloseIcon } from '../assets/images/close-icon.svg'
 
 import FilterMonsterByCR from './filter-monster-by-cr'
 import FilterMonsterBySize from './filter-monster-by-size'
 import FilterMonsterByType from './filter-monster-by-type'
+import { CardSVGdefs } from './monster-card-svg'
 import MonsterCard from './monster-card-template'
 import texture from '../assets/images/dark-card-bg.jpg'
 
@@ -21,7 +24,29 @@ const container = css`
   margin: 1.25rem auto;
 `
 
-const filterBoxToggle = (props) => css`
+const boxShadow = css`
+  box-shadow: 0 ${rem(2)} ${rem(6)} ${rem(2)} rgba(237,237,237,0.50);
+`
+
+const FiltersToggleDynamic = (props) => css`
+  ${!props.open && boxShadow};
+  height: ${!props.open ? rem(52) : rem(32)};
+  width: ${!props.open ? rem(52) : rem(32)};
+`
+
+const FiltersToggle = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: black;
+  border-radius: 100%;
+  border: 0;
+  ${FiltersToggleDynamic}
+`
+
+const FiltersBoxDynamic = (props) => css`
+  background-color: ${props.open ? 'black' : 'transparent'};
   height: ${props.open ? 'auto' : '52px'};
   width: ${props.open ? '100%' : '52px'};
 `
@@ -30,9 +55,8 @@ const FiltersBox = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;
-  background: black;
   z-index: 100;
-  ${filterBoxToggle}
+  ${FiltersBoxDynamic}
 `
 
 const FiltersList = styled.div`
@@ -62,6 +86,9 @@ const Grid = styled.div`
 const GridItem = css`
   margin: .75rem;
   max-width: 14.5rem;
+`
+
+const animate = css`
   animation: .5s ${cardAnimation};
 `
 
@@ -136,12 +163,12 @@ class CardGrid extends React.Component {
   }
 
   render () {
-    const { cards } = this.props
+    const { cards, perPage } = this.props
     const { sizeFilters, typeFilters, crRange, cardLimit, nameFilter, showFilters } = this.state
     const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange, nameFilter)
 
     return (
-      <div className={css`overflow:hidden;min-height:100vh;background:url(${texture});`}>
+      <div className={css`overflow:hidden;min-height:100vh;background:url(${texture});`} id={'monster-card-grid'} aria-live='polite'>
         <InfiniteScroll
           pageStart={0}
           loadMore={(page) => {
@@ -152,13 +179,16 @@ class CardGrid extends React.Component {
           hasMore={deck.length > cardLimit}
           loader={<div key={0}>Loading &hellip;</div>}
         >
-          <Grid>
+          <Grid className={css`margin-bottom:${rem(250)};`}>
             {deck
               .slice(0, cardLimit)
-              .map(card => (
+              .map((card, i) => (
                 <MonsterCard
                   key={`monster-${card.fields.slug}`}
-                  className={GridItem}
+                  className={css`
+                    ${GridItem}
+                    ${i > perPage && animate}
+                  `}
                   monster={card}
                 />
               ))}
@@ -166,15 +196,19 @@ class CardGrid extends React.Component {
         </InfiniteScroll>
 
         <FiltersBox open={showFilters}>
-          <button
-            className={css`color:white;`}
+          <FiltersToggle
+            open={showFilters}
             onClick={() => {
               this.setState({
                 showFilters: !showFilters
               })
-            }}>{showFilters ? 'close' : 'open'}</button>
+            }}>
+            {!showFilters && <FilterIcon width={rem(29)} height={rem(21)} />}
+            {showFilters && <CloseIcon width={rem(29)} height={rem(21)} />}
+          </FiltersToggle>
           <div className={css`${container};margin:0 auto;`}>
             <FiltersList>
+              <label for='filter-by-name' className={css`position:absolute;opacity:0;z-index:-10;`}>Enter a monters name to filter cards</label>
               <SearchInput
                 inputClassName={css`
                   background:transparent;
@@ -185,8 +219,11 @@ class CardGrid extends React.Component {
                   max-width: 100%;
                   padding:0 ${rem(10)};
                   margin-bottom:${rem(20)};
+                  -webkit-appearance: none;
                 `}
                 placeholder={'Filter By Name'}
+                id={'filter-by-name'}
+                aria-controls={'monster-card-grid'}
                 onChange={(nameFilter) => {
                   this.setState({
                     nameFilter: nameFilter
@@ -211,6 +248,7 @@ class CardGrid extends React.Component {
             onHandleToggle={(...args) => this.toggleFilter(...args, 'typeFilters')}
           />
         </FiltersBox>
+        <CardSVGdefs />
       </div>
     )
   }

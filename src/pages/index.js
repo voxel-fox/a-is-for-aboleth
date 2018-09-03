@@ -29,6 +29,7 @@ class Index extends React.Component {
       <div>
         <Helmet title={title}>
           <meta name='description' content={desc} />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
         </Helmet>
         <main>
           <div className={css`margin:${rem(10)} auto;max-width:${rem(1400)};text-align:center;`}>

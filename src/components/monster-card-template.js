@@ -71,7 +71,6 @@ class MonsterCard extends React.Component {
           {image && (<Img fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }} />)}
         </CardImage>
         {CardSvg({ name, size, type, cr })}
-
         <script type='application/ld+json'>
           {JSON.stringify({
             '@context': 'http://schema.org/',

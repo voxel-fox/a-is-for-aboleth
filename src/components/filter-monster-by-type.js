@@ -15,7 +15,10 @@ const ItemList = styled.ul`
   display: flex;
   list-style: none;
   overflow-x: auto;
-  padding: ${rem(8)} ${rem(20)};
+  padding-left: ${rem(10)};
+  padding-right: ${rem(10)};
+  padding-top: ${rem(8)};
+  padding-bottom: ${rem(8)};
   margin: 0;
 
   @media (min-width: ${rem(650)}) {
