@@ -15,13 +15,6 @@ module.exports = {
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        omitGoogleFont: true,
-        pathToConfigModule: `src/utils/typography`
-      }
-    },
-    {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {

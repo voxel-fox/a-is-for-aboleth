@@ -9,9 +9,6 @@ import StatBarChart from './monster-stat-barchart'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-// import presets from "../utils/presets"
-// import typography, { rhythm, scale } from "../utils/typography"
-
 const Container = styled.div`
   max-width: 80rem;
   padding: 0 1.25rem;
