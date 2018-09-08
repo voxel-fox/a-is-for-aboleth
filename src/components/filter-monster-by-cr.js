@@ -36,26 +36,20 @@ class FilterMonsterByCR extends React.Component {
   }
 
   getRealValue (value) {
-    const fractions = [0.125, 0.25, 0.5]
-
     if (value === 0) {
       return 0
     } else if (value < 4) {
-      return fractions[value - 1]
+      return [0.125, 0.25, 0.5][value - 1]
     } else {
       return value - 3
     }
   }
 
   toolTip (value) {
-    const fractions = ['1/8', '1/4', '1/2']
-
-    if (value === 0) {
-      return 0
-    } else if (value < 4) {
-      return fractions[value - 1]
+    if (value > 0 && value < 4) {
+      return ['1/8', '1/4', '1/2'][value - 1]
     } else {
-      return value - 3
+      return this.getRealValue(value).toString()
     }
   }
 
@@ -65,8 +59,6 @@ class FilterMonsterByCR extends React.Component {
     return (
       <div className={css`max-width:100%;width:${rem(340)};overflow:visible;`}>
         <p className={css`text-align:center;margin:0 0 ${rem(-5)} 0;color:#999;`}>
-          {/* <span className={css`display:block;`}>Challenge Rating (CR)</span>
-          <span className={css`display:block;`}>{this.tooltip(min)} - {this.tooltip(max)}</span> */}
           <abbr title='Challenge Rating'>CR</abbr>: {this.tooltip(min)} - {this.tooltip(max)}
         </p>
         <RangeCustom
@@ -77,10 +69,6 @@ class FilterMonsterByCR extends React.Component {
           defaultValue={[0, 33]}
           onChange={(value) => this.onChange(value)}
           tipFormatter={(value) => this.toolTip(value)}
-          tipProps={{
-            placement: 'bottom',
-            prefixCls: 'rc-slider-tooltip'
-          }}
           handleStyle={[{
             border: 0,
             height: 18,

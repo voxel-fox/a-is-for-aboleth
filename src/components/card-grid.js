@@ -208,7 +208,7 @@ class CardGrid extends React.Component {
           </FiltersToggle>
           <div className={css`${container};margin:0 auto;`}>
             <FiltersList>
-              <label for='filter-by-name' className={css`position:absolute;opacity:0;z-index:-10;`}>Enter a monters name to filter cards</label>
+              <label htmlFor='filter-by-name' className={css`position:absolute;opacity:0;z-index:-10;`}>Enter a monters name to filter cards</label>
               <SearchInput
                 inputClassName={css`
                   background:transparent;

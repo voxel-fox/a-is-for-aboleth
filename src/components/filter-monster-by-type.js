@@ -33,17 +33,12 @@ const ItemToggle = css`
   z-index: -1;
 `
 
-const activeLabel = (props) => css`
-  opacity: ${props.active ? 1 : 0.5};
-`
-
 const TypeLabel = styled.label`
   display: block;
   width: ${rem(90)};
   height: ${rem(115)};
   margin: 0 ${rem(8)};
   text-align: center;
-  ${activeLabel};
 `
 
 class FilterMonsterByType extends React.Component {
@@ -88,6 +83,17 @@ class FilterMonsterByType extends React.Component {
   render () {
     const { items, active } = this.props
 
+    const bgStyle = (isActive) => {
+      return isActive
+        ? {stroke: 'none', fill: '#fff'}
+        : {stroke: '#111', fill: 'none'}
+    }
+    const iconStyle = (isActive) => {
+      return isActive
+        ? {fill: '#000'}
+        : {fill: '#999'}
+    }
+
     const filterInputToggle = (name, isActive) => (
       <input
         type='checkbox'
@@ -99,13 +105,13 @@ class FilterMonsterByType extends React.Component {
     )
 
     const filterItem = (name, isActive) => (
-      <TypeLabel active={isActive}>
+      <TypeLabel>
         {filterInputToggle(name, isActive)}
         <MonsterTypeBadge
           type={name.toLowerCase()}
           svgAttrs={{width: '100%'}}
-          bgAttrs={{stroke: '#000', fill: 'none'}}
-          iconAttrs={{fill: '#fff'}}
+          bgAttrs={bgStyle(isActive)}
+          iconAttrs={iconStyle(isActive)}
         />
         {name}
       </TypeLabel>
