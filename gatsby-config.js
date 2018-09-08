@@ -25,7 +25,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Alegreya Sans:400', 'Alegreya:400,500,900']
+          families: ['Alegreya Sans:400,700', 'Alegreya:400,500,700,900']
         }
       }
     },

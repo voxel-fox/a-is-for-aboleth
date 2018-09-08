@@ -1,6 +1,8 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
 import styled, { css } from 'react-emotion'
+import { rem } from '../utils/helpers'
+
 import texture from '../assets/images/dark-card-bg.jpg'
 import StatChart from './monster-stat-chart'
 import StatList from './monster-stat-list'
@@ -22,7 +24,32 @@ const Mast = styled.div`
   overflow: hidden;
 `
 
-const InfoCardBox = styled.div`
+const InfoCardList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`
+
+const InfoCardLabel = styled.b`
+  display: inline-block;
+  margin-right: ${rem(10)};
+
+  &::after {
+    content:': '
+  }
+`
+
+const ActionCard = styled.figure`
+  display: block;
+  border: 1px solid transparent;
+  break-inside: avoid;
+  padding: ${rem(8)};
+  margin:0 0 ${rem(16)};
+  background-color: white;
+  color: black;
 `
 
 const mastImgStyle = {
@@ -46,14 +73,21 @@ class MonsterDetail extends React.Component {
       con: PropTypes.number,
       int: PropTypes.number,
       wis: PropTypes.number,
-      cha: PropTypes.number
+      cha: PropTypes.number,
+      actions: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        desc: PropTypes.string.isRequired
+      }))
     }).isRequired
   }
 
   render () {
     const { image } = this.props
-    const { name, size, type, alignment, hp } = this.props.monster
-    const { str, dex, con, int, wis, cha } = this.props.monster
+    const {
+      name, size, type, alignment, hp, actions,
+      legendary_actions, special_abilities,
+      str, dex, con, int, wis, cha
+    } = this.props.monster
     const stats = [
       { attr: 'Strength', label: 'STR', value: str },
       { attr: 'Dexterity', label: 'DEX', value: dex },
@@ -70,26 +104,24 @@ class MonsterDetail extends React.Component {
     )
 
     const InfoCard = () => (
-      <InfoCardBox>
-        <ul>
-          <li>
-            <b>Size</b>
-            <span>{size}</span>
-          </li>
-          <li>
-            <b>Type</b>
-            <span>{type}</span>
-          </li>
-          <li>
-            <b>Alignment</b>
-            <span>{alignment}</span>
-          </li>
-          <li>
-            <b>HP</b>
-            <span>{hp}</span>
-          </li>
-        </ul>
-      </InfoCardBox>
+      <InfoCardList>
+        <li>
+          <InfoCardLabel>Size</InfoCardLabel>
+          <span>{size}</span>
+        </li>
+        <li>
+          <InfoCardLabel>Type</InfoCardLabel>
+          <span>{type}</span>
+        </li>
+        <li>
+          <InfoCardLabel>Alignment</InfoCardLabel>
+          <span>{alignment}</span>
+        </li>
+        <li>
+          <InfoCardLabel>HP</InfoCardLabel>
+          <span>{hp}</span>
+        </li>
+      </InfoCardList>
     )
 
     const MonsterDetails = () => (
@@ -101,9 +133,9 @@ class MonsterDetail extends React.Component {
         </Mast>
 
         <Container>
-          <h1 className={css`margin-left:21.25rem;`}>{name}</h1>
+          <h1 className={css`margin-left:23rem;`}>{name}</h1>
           <div className={css`display:flex;`}>
-            <section className={css`width:20rem;margin-right:1.25rem;`}>
+            <section className={css`width:20rem;margin-right:3rem;`}>
               <h2 className={css`text-align: center;`}>Ability Scores</h2>
               <div>
                 <StatChart data={stats} />
@@ -113,10 +145,39 @@ class MonsterDetail extends React.Component {
             </section>
             <div>
               <InfoCard />
-              <div className={css`max-width: 37.5rem;`}>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?</p>
-                <p>Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!</p>
-              </div>
+              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
+                <h2>Actions</h2>
+                <div className={css`column-count:3;column-gap:${rem(16)};`}>
+                  {actions.map((action) => (
+                    <ActionCard>
+                      <h3 className={css`color:black;`}>{action.name}</h3>
+                      <p>{action.desc}</p>
+                    </ActionCard>
+                  ))}
+                </div>
+              </section>
+              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
+                <h2>Legendary Actions</h2>
+                <div className={css`column-count:3;column-gap:${rem(16)};`}>
+                  {legendary_actions.map((action) => (
+                    <ActionCard>
+                      <h3 className={css`color:black;`}>{action.name}</h3>
+                      <p>{action.desc}</p>
+                    </ActionCard>
+                  ))}
+                </div>
+              </section>
+              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
+                <h2>Special Abilities</h2>
+                <div className={css`column-count:3;column-gap:${rem(16)};`}>
+                  {special_abilities.map((action) => (
+                    <ActionCard>
+                      <h3 className={css`color:black;`}>{action.name}</h3>
+                      <p>{action.desc}</p>
+                    </ActionCard>
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
         </Container>
