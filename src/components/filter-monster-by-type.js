@@ -50,7 +50,7 @@ class FilterMonsterByType extends React.Component {
 
   static defaultProps = {
     items: [
-      'Abberation',
+      'Aberration',
       'Beast',
       'Celestial',
       'Construct',
