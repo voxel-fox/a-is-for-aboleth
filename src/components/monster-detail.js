@@ -84,10 +84,10 @@ class MonsterDetail extends React.Component {
   render () {
     const { image } = this.props
     const {
-      name, size, type, alignment, hp, actions,
-      legendary_actions, special_abilities,
+      name, size, type, alignment, hp,
       str, dex, con, int, wis, cha
     } = this.props.monster
+    const { monster } = this.props
     const stats = [
       { attr: 'Strength', label: 'STR', value: str },
       { attr: 'Dexterity', label: 'DEX', value: dex },
@@ -124,6 +124,20 @@ class MonsterDetail extends React.Component {
       </InfoCardList>
     )
 
+    const ActionsList = ({actions, label}) => (
+      <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
+        <h2>{label}</h2>
+        <div className={css`column-count:3;column-gap:${rem(16)};`}>
+          {actions.map((action, i) => (
+            <ActionCard key={i}>
+              <h3 className={css`color:black;`}>{action.name}</h3>
+              <p>{action.desc}</p>
+            </ActionCard>
+          ))}
+        </div>
+      </section>
+    )
+
     const MonsterDetails = () => (
       <div>
         <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
@@ -145,39 +159,15 @@ class MonsterDetail extends React.Component {
             </section>
             <div>
               <InfoCard />
-              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
-                <h2>Actions</h2>
-                <div className={css`column-count:3;column-gap:${rem(16)};`}>
-                  {actions.map((action) => (
-                    <ActionCard>
-                      <h3 className={css`color:black;`}>{action.name}</h3>
-                      <p>{action.desc}</p>
-                    </ActionCard>
-                  ))}
-                </div>
-              </section>
-              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
-                <h2>Legendary Actions</h2>
-                <div className={css`column-count:3;column-gap:${rem(16)};`}>
-                  {legendary_actions.map((action) => (
-                    <ActionCard>
-                      <h3 className={css`color:black;`}>{action.name}</h3>
-                      <p>{action.desc}</p>
-                    </ActionCard>
-                  ))}
-                </div>
-              </section>
-              <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
-                <h2>Special Abilities</h2>
-                <div className={css`column-count:3;column-gap:${rem(16)};`}>
-                  {special_abilities.map((action) => (
-                    <ActionCard>
-                      <h3 className={css`color:black;`}>{action.name}</h3>
-                      <p>{action.desc}</p>
-                    </ActionCard>
-                  ))}
-                </div>
-              </section>
+              {monster.actions && (
+                <ActionsList actions={monster.actions} label={'Actions'} />
+              )}
+              {monster.legendary_actions && (
+                <ActionsList actions={monster.legendary_actions} label={'Actions'} />
+              )}
+              {monster.special_abilities && (
+                <ActionsList actions={monster.special_abilities} label={'Special Abilities'} />
+              )}
             </div>
           </div>
         </Container>
