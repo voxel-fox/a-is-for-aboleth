@@ -34,6 +34,8 @@
     "recharts": "^1.0.0-beta.10",
     "serve": "^10.0.0",
     "slug": "^0.9.1",
+    "svg-sprite-loader": "^3.9.2",
+    "svgo-loader": "^2.1.0",
     "typography": "^0.16.17"
   },
   "license": "",
