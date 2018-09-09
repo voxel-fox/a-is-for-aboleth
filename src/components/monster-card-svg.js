@@ -1,26 +1,8 @@
 import { string } from 'prop-types'
 import React from 'react'
 import romanize from '../utils/romanize'
-import { TypeIconDefs } from './monster-type-badge'
-
+import { ReactComponent as SVGDefs }  from '../assets/symbols.svg'
 import { css } from 'react-emotion'
-
-export const CardSymbolDefs = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' className={css`display:none;`} aria-hidden='true'>
-    <symbol id='card-frame'>
-      <path d='m4.93 294.06h217.67v42h-217.67z' fill='#fff' stroke='#000' strokeMiterlimit='10' />
-      <path d='m227.39 5v328.51a5 5 0 0 1 -5 5h-217.39a5 5 0 0 1 -5-5v-328.51a5 5 0 0 1 5-5h217.39a5 5 0 0 1 5 5zm-7 317.24v-304.49a12 12 0 0 0 -12-12h-189.39a12 12 0 0 0 -12 12v304.49a12 12 0 0 0 12 12h189.36a12 12 0 0 0 12-12zm-143.96-316.49c2.84 16 18.47 28.32 37.34 28.32s34.49-12.28 37.33-28.32z' />
-      <path d='m15.12 14.68h197.05v273.55h-197.05z' fill='none' stroke='#000' strokeLinecap='round' strokeLinejoin='round' />
-      <circle cx='25.8' cy='24.35' fill='#fff' r='15.25' stroke='#000' strokeMiterlimit='10' />
-      <ellipse cx='17.03' cy='284.73' fill='#fff' rx='7.47' ry='7.5' stroke='#000' strokeMiterlimit='10' />
-      <g>
-        <path d='m197.21 15.08 9.79-5.58 10 5.65v11.5l-10 5.85-10-5.92z' fill='#f00' stroke='#000' strokeMiterlimit='10' />
-        <text fontFamily='Alegreya-Medium,Alegreya' fill='#fff' fontSize='12' transform='matrix(1.1 0 0 1 203.97 23.83)'>5</text>
-        <text fontFamily='Alegreya-Medium,Alegreya' fill='#fff' fontSize='5' transform='matrix(1.1 0 0 1 209.95 24.94)'>e</text>
-      </g>
-    </symbol>
-  </svg>
-)
 
 const CreatureSize = ({size}) => (
   <text fontFamily='Alegreya-Medium,Alegreya' fontSize='11' transform='matrix(.93 0 0 1 17.23 288.32)' textAnchor='middle'>
@@ -76,10 +58,7 @@ const CardSVG = ({size, name, type, cr}) => (
 )
 
 export const CardSVGdefs = () => (
-  <React.Fragment>
-    <TypeIconDefs />
-    <CardSymbolDefs />
-  </React.Fragment>
+  <SVGDefs />
 )
 
 CardSVG.propTypes = {
