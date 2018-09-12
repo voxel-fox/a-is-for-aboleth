@@ -8,7 +8,7 @@
         "source": "**/*.@(jpg|jpeg|gif|png|webp|svg|js|css)",
         "headers": [{
           "key": "Cache-Control",
-          "value": "max-age=86400"
+          "value": "public, max-age=0, must-revalidate"
         }]
       }
     ]
