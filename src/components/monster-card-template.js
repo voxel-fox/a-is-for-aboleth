@@ -10,9 +10,10 @@ import placholder from '../assets/images/unknown-card.svg'
 const CardBase = css`
   display: block;
   position: relative;
-  width: ${rem(144)};
+  width: ${rem(140)};
   overflow: hidden;
   border-radius: .5rem;
+  text-decoration: none;
 
   @media (min-width: ${rem(650)}) {
     width: ${rem(200)};
@@ -21,10 +22,10 @@ const CardBase = css`
 
 const CardImage = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  top: ${rem(2)};
+  right: ${rem(2)};
+  bottom: ${rem(2)};
+  left: ${rem(2)};
 `
 
 class MonsterCard extends React.Component {
@@ -78,11 +79,11 @@ class MonsterCard extends React.Component {
             'name': 'System Reference Document 5.1 ("SRD5")',
             'character': {
               '@type': 'Person/Monster',
-              'name': {name},
-              'type': {type},
-              'challenge_rating': {cr},
-              'size': {size},
-              'alignment': {alignment}
+              'name': { name },
+              'type': { type },
+              'challenge_rating': { cr },
+              'size': { size },
+              'alignment': { alignment }
             }
           })}
         </script>

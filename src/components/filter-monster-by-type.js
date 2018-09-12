@@ -85,13 +85,13 @@ class FilterMonsterByType extends React.Component {
 
     const bgStyle = (isActive) => {
       return isActive
-        ? {stroke: 'none', fill: '#fff'}
-        : {stroke: '#111', fill: 'none'}
+        ? { stroke: 'none', fill: '#fff' }
+        : { stroke: '#111', fill: 'none' }
     }
     const iconStyle = (isActive) => {
       return isActive
-        ? {fill: '#000'}
-        : {fill: '#999'}
+        ? { fill: '#000' }
+        : { fill: '#999' }
     }
 
     const filterInputToggle = (name, isActive) => (
@@ -109,7 +109,7 @@ class FilterMonsterByType extends React.Component {
         {filterInputToggle(name, isActive)}
         <MonsterTypeBadge
           type={name.toLowerCase()}
-          svgAttrs={{width: '100%'}}
+          svgAttrs={{ width: '100%' }}
           bgAttrs={bgStyle(isActive)}
           iconAttrs={iconStyle(isActive)}
         />
