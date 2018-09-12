@@ -20,9 +20,9 @@
     "gatsby-source-filesystem": "^2.0.1-rc.1",
     "gatsby-transformer-json": "^2.1.1-rc.1",
     "gatsby-transformer-sharp": "^2.1.1-rc.2",
-    "memoize-one": "^3.1.1",
+    "memoize-one": "^4.0.2",
     "prop-types": "^15.5.8",
-    "rc-slider": "^8.6.1",
+    "rc-slider": "^8.6.2",
     "react": "^16.4.2",
     "react-animations": "^1.0.0",
     "react-dom": "^16.4.2",
@@ -35,13 +35,13 @@
     "serve": "^10.0.0",
     "slug": "^0.9.1",
     "svg-sprite-loader": "^3.9.2",
+    "svgo": "^1.0.5",
     "svgo-loader": "^2.1.0",
     "typography": "^0.16.17"
   },
   "license": "",
   "main": "n/a",
   "scripts": {
-    "test": "standard && start-server-and-test develop http://localhost:8000 cy:run",
     "develop": "gatsby develop",
     "dev": "gatsby develop",
     "build": "gatsby build",
@@ -69,7 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.0.1",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -78,11 +78,10 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-macros": "^2.4.0",
     "eslint": "^5.4.0",
     "eslint-plugin-babel": "^5.1.0",
-    "standard": "^11.0.1",
-    "start-server-and-test": "^1.1.4"
+    "standard": "^12.0.1"
   }
 }

@@ -7,8 +7,6 @@ import { rem } from '../utils/helpers'
 import { zoomInUp } from 'react-animations'
 import InfiniteScroll from 'react-infinite-scroller'
 import SearchInput, { createFilter } from 'react-search-input'
-import { ReactComponent as FilterIcon } from '../assets/images/filter-icon.svg'
-import { ReactComponent as CloseIcon } from '../assets/images/close-icon.svg'
 
 import FilterMonsterByCR from './filter-monster-by-cr'
 import FilterMonsterBySize from './filter-monster-by-size'
@@ -38,14 +36,17 @@ const FiltersToggle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  ${FiltersToggleDynamic}
+  padding: 0;
   background: black;
   border-radius: 100%;
   border: 0;
-  ${FiltersToggleDynamic}
+  color: white;
+  -webkit-appearance: none;
 `
 
 const FiltersBoxDynamic = (props) => css`
+  ${props.open && boxShadow};
   background-color: ${props.open ? 'black' : 'transparent'};
   height: ${props.open ? 'auto' : '52px'};
   width: ${props.open ? '100%' : '52px'};
@@ -84,8 +85,12 @@ const Grid = styled.div`
 `
 
 const GridItem = css`
-  margin: .75rem;
+  margin: ${rem(6)};
   max-width: 14.5rem;
+
+  @media (min-width: ${rem(358)}) {
+    margin: ${rem(12)};
+  }
 `
 
 const animate = css`
@@ -203,18 +208,21 @@ class CardGrid extends React.Component {
                 showFilters: !showFilters
               })
             }}>
-            {!showFilters && <FilterIcon width={rem(29)} height={rem(21)} />}
-            {showFilters && <CloseIcon width={rem(29)} height={rem(21)} />}
+            <span className={css`opacity:0;position:absolute;`}>{!showFilters ? 'Open' : 'Close'} Filters</span>
+            {showFilters && <svg width={20} height={20} fill='#fff'><use xlinkHref='#close' /></svg>}
+            {!showFilters && <svg width={25} height={19} fill='#fff'><use xlinkHref='#filters' /></svg>}
           </FiltersToggle>
           <div className={css`${container};margin:0 auto;`}>
             <FiltersList>
               <label htmlFor='filter-by-name' className={css`position:absolute;opacity:0;z-index:-10;`}>Enter a monters name to filter cards</label>
               <SearchInput
+                className={css`max-width:calc(100vw - 3rem);`}
                 inputClassName={css`
                   background:transparent;
                   color:white;
                   border:0;
                   border-bottom:1px solid rgba(255,255,255, 0.7);
+                  border-radius: 0;
                   width:${rem(340)};
                   max-width: 100%;
                   padding:0 ${rem(10)};
