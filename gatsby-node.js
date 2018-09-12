@@ -9,8 +9,17 @@ const slugify = (text) => {
   return slug(text, {lower: true})
 }
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+const crValue = (cr) => {
+  if (cr.indexOf('/') !== -1) {
+    const split = cr.split('/')
+    return 1 / ~~split[1]
+  } else {
+    return ~~cr
+  }
+}
+
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     resolve(
@@ -22,6 +31,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 node {
                   name
                   type
+                  challenge_rating
                 }
               }
             }
@@ -51,8 +61,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   })
 }
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
-  const { createNodeField } = boundActionCreators
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions
 
   if (node.internal.type === `MonstersSrd5EJson`) {
     const data = _resolve(__dirname, './data/')
@@ -78,6 +88,12 @@ exports.onCreateNode = ({ node, boundActionCreators }) => {
       node,
       name: `cardImage`,
       value: relative(data, image)
+    })
+
+    createNodeField({
+      node,
+      name: `crValue`,
+      value: crValue(node.challenge_rating)
     })
   }
 }

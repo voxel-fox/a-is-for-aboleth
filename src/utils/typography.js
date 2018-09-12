@@ -1,16 +1,6 @@
 import Typography from 'typography'
 
 const options = {
-  googleFonts: [
-    {
-      name: `Alegreya Sans`,
-      styles: [`400`, `400i`, `700`, `700i`]
-    },
-    {
-      name: `Alegreya`,
-      styles: [`400`, `400i`, `700`, `700i`]
-    }
-  ],
   baseFontSize: `16px`,
   baseLineHeight: 1.4,
   headerColor: `white`,

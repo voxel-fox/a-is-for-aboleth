@@ -1,0 +1,8 @@
+*
+!src
+!gastsby-browser.js
+!gastsby-config.js
+!gastsby-node.js
+!gastsby-ssr.js
+!package.json
+!yarn.lock

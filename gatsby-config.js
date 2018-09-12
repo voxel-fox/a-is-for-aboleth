@@ -13,10 +13,20 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-transformer-json`,
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
+        omitGoogleFont: true,
         pathToConfigModule: `src/utils/typography`
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Alegreya Sans:400,700', 'Alegreya:400,500,700,900']
+        }
       }
     },
     {
@@ -26,9 +36,20 @@ module.exports = {
         viewBox: false
         // see https://github.com/smooth-code/svgr for a list of all options
       }
-    }
-    // `gatsby-plugin-manifest`,
-    // `gatsby-plugin-offline`,
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'A is for Aboleth',
+        short_name: 'AisforAboleth',
+        start_url: '/',
+        background_color: '#000000',
+        theme_color: '#ffffff',
+        display: 'minimal-ui',
+        icon: 'src/assets/images/icon.png'
+      }
+    },
+    `gatsby-plugin-offline`
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {

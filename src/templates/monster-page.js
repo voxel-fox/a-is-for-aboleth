@@ -1,5 +1,6 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
+import { graphql } from 'gatsby'
 import MonsterDetail from '../components/monster-detail'
 
 class MonsterTemplate extends React.Component {
@@ -10,23 +11,37 @@ class MonsterTemplate extends React.Component {
   }
 
   render () {
-    const { monster, typeImage, monsterImage } = this.props.data
-    return (<MonsterDetail monster={monster} image={monsterImage || typeImage} />)
+    const {
+      monster,
+      imageFallback,
+      imageMonster
+    } = this.props.data
+
+    return (
+      <MonsterDetail
+        monster={monster}
+        image={(imageMonster && imageMonster.sharp) || (imageFallback && imageFallback.sharp)}
+      />
+    )
   }
 }
 
 export default MonsterTemplate
 
 export const pageQuery = graphql`
-  query MonsterPage($name: String!, $imgRegexType: String!, $imgRegexMonster: String!) {
+  query($name: String!, $imgRegexType: String!, $imgRegexMonster: String!) {
     monster: monstersSrd5EJson(name: { eq: $name }) {
       ...MonsterFields
     }
-    typeImage: imageSharp(id: { regex: $imgRegexType }) {
-      ...MonsterMast_img
+    imageFallback: file(relativePath: {regex: $imgRegexType }) {
+      sharp: childImageSharp {
+        ...MonsterMast_img
+      }
     }
-    monsterImage: imageSharp(id: { regex: $imgRegexMonster }) {
-      ...MonsterMast_img
+    imageMonster: file(relativePath: {regex: $imgRegexMonster }) {
+      sharp: childImageSharp {
+        ...MonsterMast_img
+      }
     }
   }
 `

@@ -1,19 +1,18 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
 import styled, { css } from 'react-emotion'
+import { rem } from '../utils/helpers'
+
 import texture from '../assets/images/dark-card-bg.jpg'
 import StatChart from './monster-stat-chart'
 import StatList from './monster-stat-list'
 import StatBarChart from './monster-stat-barchart'
 
-import Link from 'gatsby-link'
+import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-// import presets from "../utils/presets"
-// import typography, { rhythm, scale } from "../utils/typography"
-
 const Container = styled.div`
-  max-width: 100rem;
+  max-width: 80rem;
   padding: 0 1.25rem;
   margin: 1.25rem auto;
 `
@@ -22,7 +21,37 @@ const Mast = styled.div`
   position: relative;
   height: 25rem;
   background: url(${texture});
+  overflow: hidden;
 `
+
+const InfoCardList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`
+
+const InfoCardLabel = styled.b`
+  display: inline-block;
+  margin-right: ${rem(10)};
+
+  &::after {
+    content:': '
+  }
+`
+
+const ActionCard = styled.figure`
+  display: block;
+  border: 1px solid transparent;
+  break-inside: avoid;
+  padding: ${rem(8)};
+  margin:0 0 ${rem(16)};
+  background-color: white;
+  color: black;
+`
+
 const mastImgStyle = {
   position: 'absolute',
   left: 0,
@@ -44,14 +73,21 @@ class MonsterDetail extends React.Component {
       con: PropTypes.number,
       int: PropTypes.number,
       wis: PropTypes.number,
-      cha: PropTypes.number
+      cha: PropTypes.number,
+      actions: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        desc: PropTypes.string.isRequired
+      }))
     }).isRequired
   }
 
   render () {
     const { image } = this.props
-    const { name, size, type, alignment, hp } = this.props.monster
-    const { str, dex, con, int, wis, cha } = this.props.monster
+    const {
+      name, size, type, alignment, hp,
+      str, dex, con, int, wis, cha
+    } = this.props.monster
+    const { monster } = this.props
     const stats = [
       { attr: 'Strength', label: 'STR', value: str },
       { attr: 'Dexterity', label: 'DEX', value: dex },
@@ -61,25 +97,59 @@ class MonsterDetail extends React.Component {
       { attr: 'Charisma', label: 'CHA', value: cha }
     ]
 
-    console.debug('monster', this.props.monster)
-
     const MonsterImage = () => (
-      <Mast className={css`object-fit: cover;`}>
-        {image && (<Img sizes={{ ...image.sizes }} style={mastImgStyle} />)}
-      </Mast>
+      <div className={css`position:absolute;top:0;left:0;right:0;bottom:0;`}>
+        {image && (<Img fluid={{ ...image.fluid }} style={mastImgStyle} />)}
+      </div>
+    )
+
+    const InfoCard = () => (
+      <InfoCardList>
+        <li>
+          <InfoCardLabel>Size</InfoCardLabel>
+          <span>{size}</span>
+        </li>
+        <li>
+          <InfoCardLabel>Type</InfoCardLabel>
+          <span>{type}</span>
+        </li>
+        <li>
+          <InfoCardLabel>Alignment</InfoCardLabel>
+          <span>{alignment}</span>
+        </li>
+        <li>
+          <InfoCardLabel>HP</InfoCardLabel>
+          <span>{hp}</span>
+        </li>
+      </InfoCardList>
+    )
+
+    const ActionsList = ({actions, label}) => (
+      <section className={css`margin-top:${rem(48)};border-top:1px solid white;padding-top:${rem(16)};`}>
+        <h2>{label}</h2>
+        <div className={css`column-count:3;column-gap:${rem(16)};`}>
+          {actions.map((action, i) => (
+            <ActionCard key={i}>
+              <h3 className={css`color:black;`}>{action.name}</h3>
+              <p>{action.desc}</p>
+            </ActionCard>
+          ))}
+        </div>
+      </section>
     )
 
     const MonsterDetails = () => (
       <div>
-        <MonsterImage />
+        <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
+
+        <Mast className={css`object-fit: cover;`}>
+          <MonsterImage />
+        </Mast>
+
         <Container>
-          <Link className={css`color: white;`} to='/'>&larr; back to compendium</Link>
-          <h1 className={css`text-align: center;`}>{name}</h1>
+          <h1 className={css`margin-left:23rem;`}>{name}</h1>
           <div className={css`display:flex;`}>
-            <section className={css`width:20rem;margin-right:1.25rem;`}>
-              <h2 className={css`text-align: center;`}>Gallery</h2>
-            </section>
-            <section className={css`width:20rem;margin-right:1.25rem;`}>
+            <section className={css`width:20rem;margin-right:3rem;`}>
               <h2 className={css`text-align: center;`}>Ability Scores</h2>
               <div>
                 <StatChart data={stats} />
@@ -88,28 +158,16 @@ class MonsterDetail extends React.Component {
               </div>
             </section>
             <div>
-              <dl>
-                <div>
-                  <dt>Size</dt>
-                  <dd>{size}</dd>
-                </div>
-                <div>
-                  <dt>Type</dt>
-                  <dd>{type}</dd>
-                </div>
-                <div>
-                  <dt>Alignment</dt>
-                  <dd>{alignment}</dd>
-                </div>
-                <div>
-                  <dt>HP</dt>
-                  <dd>{hp}</dd>
-                </div>
-              </dl>
-              <div className={css`max-width: 37.5rem;`}>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur reprehenderit ullam neque voluptatem omnis a dolore quo voluptate, est iste quos nemo assumenda commodi cumque consectetur, ipsum debitis distinctio?</p>
-                <p>Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!Deserunt temporibus repudiandae quia natus, explicabo aut sapiente pariatur hic! Necessitatibus, culpa. Deserunt dolore suscipit hic, vel pariatur quisquam alias sint quo, expedita reiciendis dicta distinctio voluptates necessitatibus assumenda doloremque!</p>
-              </div>
+              <InfoCard />
+              {monster.actions && (
+                <ActionsList actions={monster.actions} label={'Actions'} />
+              )}
+              {monster.legendary_actions && (
+                <ActionsList actions={monster.legendary_actions} label={'Actions'} />
+              )}
+              {monster.special_abilities && (
+                <ActionsList actions={monster.special_abilities} label={'Special Abilities'} />
+              )}
             </div>
           </div>
         </Container>
@@ -126,13 +184,12 @@ export default MonsterDetail
 
 export const MonsterDetailFragment = graphql`
   fragment MonsterMast_img on ImageSharp {
-    sizes: sizes(
+    fluid: fluid(
       maxWidth: 1600
       maxHeight: 400
       quality: 80
-      traceSVG: { background: "#27282C", color: "#000000" }
     ) {
-      ...GatsbyImageSharpSizes_tracedSVG
+      ...GatsbyImageSharpFluid_withWebp
     }
   }
   fragment MonsterFields on MonstersSrd5EJson {
@@ -141,6 +198,20 @@ export const MonsterDetailFragment = graphql`
     type
     subtype
     alignment
+    hit_dice
+    speed
+    special_abilities {
+      name
+      desc
+    }
+    actions {
+      name
+      desc
+    }
+    legendary_actions {
+      name
+      desc
+    }
     ac: armor_class
     hp: hit_points
     cr: challenge_rating

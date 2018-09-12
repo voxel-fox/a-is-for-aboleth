@@ -1,16 +1,22 @@
 import * as PropTypes from 'prop-types'
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { css } from 'react-emotion'
 import CardSvg from './monster-card-svg'
+import { rem } from '../utils/helpers'
+import placholder from '../assets/images/unknown-card.svg'
 
 const CardBase = css`
   display: block;
   position: relative;
-  width: 16rem;
+  width: ${rem(144)};
   overflow: hidden;
   border-radius: .5rem;
+
+  @media (min-width: ${rem(650)}) {
+    width: ${rem(200)};
+  }
 `
 
 const CardImage = styled.div`
@@ -29,7 +35,7 @@ class MonsterCard extends React.Component {
       cr: PropTypes.string.isRequired,
       cardImage: PropTypes.shape({
         childImageSharp: PropTypes.shape({
-          sizes: PropTypes.objectOf(PropTypes.string)
+          fluid: PropTypes.objectOf(PropTypes.string)
         })
       }),
       fields: PropTypes.shape({
@@ -46,6 +52,7 @@ class MonsterCard extends React.Component {
         size,
         type,
         cr,
+        alignment,
         fields: {
           slug,
           cardImage
@@ -53,8 +60,7 @@ class MonsterCard extends React.Component {
       }
     } = this.props
 
-    const { childImageSharp } = cardImage || false
-    const image = childImageSharp || false
+    const image = cardImage && cardImage.childImageSharp
 
     return (
       <Link
@@ -62,9 +68,24 @@ class MonsterCard extends React.Component {
         to={`/${slug}/`}
       >
         <CardImage>
-          {image && (<Img sizes={{ ...image.sizes }} />)}
+          {image && (<Img fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }} />)}
         </CardImage>
         {CardSvg({ name, size, type, cr })}
+        <script type='application/ld+json'>
+          {JSON.stringify({
+            '@context': 'http://schema.org/',
+            '@type': 'Game',
+            'name': 'System Reference Document 5.1 ("SRD5")',
+            'character': {
+              '@type': 'Person/Monster',
+              'name': {name},
+              'type': {type},
+              'challenge_rating': {cr},
+              'size': {size},
+              'alignment': {alignment}
+            }
+          })}
+        </script>
       </Link>
     )
   }
@@ -74,20 +95,20 @@ export default MonsterCard
 
 export const monsterCardFragment = graphql`
   fragment MonsterCard_img on ImageSharp {
-    sizes: sizes(
+    fluid: fluid(
       maxWidth: 380
       maxHeight: 550
       quality: 80
       duotone: { highlight: "#e9d7be", shadow: "#514b36", opacity: 80 }
-      traceSVG: { background: "#f2f8f3", color: "#d6ebd9" }
     ) {
-      ...GatsbyImageSharpSizes_tracedSVG
+      ...GatsbyImageSharpFluid_withWebp
     }
   }
   fragment MonsterCard_details on MonstersSrd5EJson {
     name
     fields {
       slug
+      crValue
       cardImage {
         childImageSharp {
           ...MonsterCard_img
