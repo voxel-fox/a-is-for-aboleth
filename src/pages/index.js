@@ -23,7 +23,7 @@ class Index extends React.Component {
     const { monsters } = this.props.data
 
     const title = `"A" is for Aboleth`
-    const desc = 'A visual deck of cards based on the 5th edition System Reference Document (SDR) of a popular table top role playing game.'
+    const desc = 'A visual deck of cards based on the 5th edition System Reference Document (SRD) of a popular table top role playing game.'
 
     return (
       <div>
