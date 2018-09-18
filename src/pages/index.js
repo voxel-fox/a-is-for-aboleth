@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { graphql } from 'gatsby'
 import CardGrid from '../components/card-grid'
+import ContactBadge from '../components/contact-badge'
 import Helmet from 'react-helmet'
 import { injectGlobal, css } from 'react-emotion'
 import { rem } from '../utils/helpers'
@@ -41,6 +42,7 @@ class Index extends React.Component {
             perPage={12}
           />
         </main>
+        <ContactBadge />
       </div>
     )
   }
