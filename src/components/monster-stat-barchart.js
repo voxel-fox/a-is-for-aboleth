@@ -21,7 +21,7 @@ export default class StatBarChart extends Component {
 
   render () {
     const { data } = this.props
-    const margins = {top: 5, right: 30, left: 20, bottom: 5}
+    const margins = { top: 5, right: 30, left: 20, bottom: 5 }
 
     const modifiers = data.map((stat) => {
       const mod = (stat.value - 10) / 2
@@ -59,12 +59,13 @@ export default class StatBarChart extends Component {
     return (
       <ResponsiveContainer aspect={1} minWidth={250}>
         <BarChart data={modifiers} margin={margins}>
-          <XAxis dataKey='label' interval={0} domain={['auto', 'auto']} axisLine={false} tickLine={false} tick={{fontSize: 10}} />
+          <XAxis dataKey='label' interval={0} domain={['auto', 'auto']} axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
           <YAxis domain={[-5, 12]} axisLine={false} tickLine={false} tick={false} />
           <ReferenceLine y={10} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='god like' />} />
           <ReferenceLine y={5} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='epic' />} />
           <ReferenceLine y={0} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='average' />} />
-          <ReferenceLine y={-5} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='abysmal' />} />
+          <ReferenceLine y={-2.5} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='poor' />} />
+          <ReferenceLine y={-5} stroke='#ffffff' strokeOpacity={0.2} label={<StatGrade label='' />} />
           <Bar
             dataKey='mod'
             stroke={0}
