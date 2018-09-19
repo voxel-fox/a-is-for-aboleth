@@ -2,6 +2,7 @@ import * as PropTypes from 'prop-types'
 import React from 'react'
 import { graphql } from 'gatsby'
 import CardGrid from '../components/card-grid'
+import ContactBadge from '../components/contact-badge'
 import Helmet from 'react-helmet'
 import { injectGlobal, css } from 'react-emotion'
 import { rem } from '../utils/helpers'
@@ -23,7 +24,7 @@ class Index extends React.Component {
     const { monsters } = this.props.data
 
     const title = `"A" is for Aboleth`
-    const desc = 'A visual deck of cards based on the 5th edition System Reference Document (SDR) of a popular table top role playing game.'
+    const desc = 'A visual deck of cards based on the 5th edition System Reference Document (SRD) of a popular table top role playing game.'
 
     return (
       <div>
@@ -41,6 +42,7 @@ class Index extends React.Component {
             perPage={12}
           />
         </main>
+        <ContactBadge />
       </div>
     )
   }

@@ -51,8 +51,8 @@ exports.createPages = ({ graphql, actions }) => {
             component: slash(monsterTemplate),
             context: {
               name: node.name,
-              imgRegexType: `/monster-types/${node.type}/`,
-              imgRegexMonster: `/monsters/${slug}/`
+              imgRegexType: `/monster-types/${node.type}-mast/`,
+              imgRegexMonster: `/monsters/${slug}-mast/`
             }
           })
         })
