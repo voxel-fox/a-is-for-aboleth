@@ -29,6 +29,7 @@ class Index extends React.Component {
     return (
       <div>
         <Helmet title={title}>
+          <meta name="google-site-verification" content="ZVvgrDxauwoLid_aeqLUxbNGwQNYF8FLKxcjMFlJSWA" />
           <meta name="description" content={desc} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
         </Helmet>
