@@ -18,7 +18,7 @@ class MonsterTemplate extends React.Component {
     return (
       <>
         <Helmet title={`${monster.name} (5e)`}>
-          <meta name="description" content={`Stats, actions and details for the ${monster.name} a ${monster.cr} CR creature. This monster is typically of a ${monster.alignment} alignment and is ${monster.size} sized. It has ${monster.actions.length} actions.`} />
+          <meta name="description" content={`Stats, actions and details for the ${monster.name} a ${monster.cr} CR creature. This monster is typically of a ${monster.alignment} alignment and is ${monster.size} sized.`} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
         </Helmet>
         <MonsterDetail monster={monster} image={(imageMonster && imageMonster.sharp) || (imageFallback && imageFallback.sharp)} />
