@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled, { css } from "react-emotion";
@@ -28,7 +28,7 @@ const CardImage = styled.div`
   left: ${rem(2)};
 `;
 
-class MonsterCard extends React.Component {
+class MonsterCard extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     monster: PropTypes.shape({

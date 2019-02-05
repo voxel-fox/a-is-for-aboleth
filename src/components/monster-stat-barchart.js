@@ -1,8 +1,8 @@
 import * as PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { BarChart, Bar, ReferenceLine, XAxis, YAxis, LabelList, ResponsiveContainer } from "recharts";
 
-export default class StatBarChart extends Component {
+export default class StatBarChart extends PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(
       PropTypes.shape({

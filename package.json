@@ -48,7 +48,9 @@
     "develop": "gatsby develop",
     "dev": "gatsby develop",
     "build": "gatsby build",
-    "start": "serve public/"
+    "start": "serve public/",
+    "test": "jest",
+    "coverage": "jest --env=jsdom --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -61,10 +63,21 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^24.0.0",
+    "babel-plugin-emotion": "^10.0.7",
     "babel-plugin-macros": "^2.4.0",
+    "babel-preset-gatsby": "^0.1.6",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.0",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.4.0",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "1.16.4"
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.0.0",
+    "jest-emotion": "^10.0.7",
+    "prettier": "1.16.4",
+    "react-test-renderer": "^16.7.0",
+    "sinon": "^7.2.3"
   }
 }

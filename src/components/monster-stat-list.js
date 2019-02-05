@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 import { css } from "react-emotion";
 import statMod from "../utils/stat-mod";
 
@@ -10,7 +10,7 @@ const statRowStyle = css`
   margin: 0 0.5rem;
 `;
 
-class MonsterStatList extends React.Component {
+class MonsterStatList extends PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(
       PropTypes.shape({

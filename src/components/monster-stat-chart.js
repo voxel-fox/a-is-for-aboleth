@@ -1,8 +1,8 @@
 import * as PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Radar } from "recharts";
 
-export default class StatChart extends Component {
+export default class StatChart extends PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(
       PropTypes.shape({

@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 import styled, { css } from "react-emotion";
 import { ReactComponent as SVGDefs } from "../assets/symbols.svg";
 import { rem } from "../utils/helpers";
@@ -116,7 +116,7 @@ const mastImgStyle = {
   height: "100%"
 };
 
-class MonsterDetail extends React.Component {
+class MonsterDetail extends PureComponent {
   static propTypes = {
     monster: PropTypes.shape({
       name: PropTypes.string.isRequired,
