@@ -1,4 +1,4 @@
-import Typography from 'typography'
+import Typography from "typography";
 
 const options = {
   baseFontSize: `16px`,
@@ -8,8 +8,8 @@ const options = {
   blockMarginBottom: 0.75,
   headerFontFamily: [`Alegreya Sans`, `sans-serif`],
   bodyFontFamily: [`Alegreya`, `sans-serif`]
-}
+};
 
-const typography = new Typography(options)
+const typography = new Typography(options);
 
-export default typography
+export default typography;
