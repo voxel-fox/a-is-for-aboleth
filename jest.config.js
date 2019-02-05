@@ -14,5 +14,5 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{js,jsx}"],
   setupFiles: [`<rootDir>/loadershim.js`],
   setupFilesAfterEnv: ["<rootDir>/setup-test-env.js"],
-  snapshotSerializers: ["enzyme-to-json/serializer", "jest-emotion"]
+  snapshotSerializers: ["jest-emotion", "enzyme-to-json/serializer"]
 };

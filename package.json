@@ -51,8 +51,8 @@
     "dev": "gatsby develop",
     "build": "gatsby build",
     "start": "serve public/",
-    "test": "jest",
-    "coverage": "jest --env=jsdom --coverage"
+    "test": "cross-env NODE_ENV=test jest",
+    "coverage": "cross-env NODE_ENV=test jest --env=jsdom --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -69,6 +69,7 @@
     "babel-plugin-emotion": "^10.0.7",
     "babel-plugin-macros": "^2.4.5",
     "babel-preset-gatsby": "^0.1.6",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.0",
     "enzyme-to-json": "^3.3.5",

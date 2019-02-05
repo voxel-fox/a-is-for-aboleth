@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MonsterStatList /> renders correctly 1`] = `
+<dl
+  css={
+    Object {
+      "name": "1m0avwd-statListStyle",
+      "styles": "display:flex;width:300px;justify-content:center;label:statListStyle;",
+    }
+  }
+>
+  <StatRow
+    key="STR"
+    stat={
+      Object {
+        "attr": "Strength",
+        "label": "STR",
+        "value": 11,
+      }
+    }
+  />
+  <StatRow
+    key="DEX"
+    stat={
+      Object {
+        "attr": "Dexterity",
+        "label": "DEX",
+        "value": 13,
+      }
+    }
+  />
+  <StatRow
+    key="WIS"
+    stat={
+      Object {
+        "attr": "Wisdom",
+        "label": "WIS",
+        "value": 8,
+      }
+    }
+  />
+</dl>
+`;
+
+exports[`<StatRow /> renders correctly 1`] = `
+<div
+  css={
+    Object {
+      "name": "sary25-statRowStyle",
+      "styles": "display:flex;align-items:center;flex-direction:column;margin:0 0.5rem;label:statRowStyle;",
+    }
+  }
+>
+  <dt>
+    <abbr
+      title="Strength"
+    >
+      STR
+    </abbr>
+  </dt>
+  <dd
+    css={
+      Object {
+        "name": "1vpzcww-statValueStyle",
+        "styles": "margin:0;font-size:1.2em;label:statValueStyle;",
+      }
+    }
+  >
+    11
+  </dd>
+  <dd
+    css={
+      Object {
+        "name": "rtzr43-statModStyle",
+        "styles": "margin:0;label:statModStyle;",
+      }
+    }
+  >
+    0
+  </dd>
+</div>
+`;

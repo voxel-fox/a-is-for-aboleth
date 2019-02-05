@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BarLabel /> renders correctly when 0 or more 1`] = `
+<text
+  fill="#ffffff"
+  fontSize="16"
+  textAnchor="middle"
+  x={6}
+  y={-7}
+>
+  +8
+</text>
+`;
+
+exports[`<BarLabel /> renders correctly when negative 1`] = `
+<text
+  fill="#ffffff"
+  fontSize="16"
+  textAnchor="middle"
+  x={6}
+  y={17}
+>
+  -8
+</text>
+`;
+
+exports[`<StatBarChart /> renders correctly 1`] = `
+<ResponsiveContainer
+  aspect={1}
+  debounce={0}
+  height="100%"
+  minWidth={250}
+  width="100%"
+>
+  <BarChart
+    barCategoryGap="10%"
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "attr": "Strength",
+          "label": "STR",
+          "mod": 0.5,
+          "value": 11,
+        },
+        Object {
+          "attr": "Dexterity",
+          "label": "DEX",
+          "mod": 1.5,
+          "value": 13,
+        },
+      ]
+    }
+    layout="horizontal"
+    margin={
+      Object {
+        "bottom": 5,
+        "left": 20,
+        "right": 30,
+        "top": 5,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+  >
+    <XAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      dataKey="label"
+      domain={
+        Array [
+          "auto",
+          "auto",
+        ]
+      }
+      height={30}
+      hide={false}
+      interval={0}
+      mirror={false}
+      orientation="bottom"
+      padding={
+        Object {
+          "left": 0,
+          "right": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tick={
+        Object {
+          "fontSize": 10,
+        }
+      }
+      tickCount={5}
+      tickLine={false}
+      type="category"
+      width={0}
+      xAxisId={0}
+    />
+    <YAxis
+      allowDataOverflow={false}
+      allowDecimals={true}
+      allowDuplicatedCategory={true}
+      axisLine={false}
+      domain={
+        Array [
+          -5,
+          12,
+        ]
+      }
+      height={0}
+      hide={false}
+      mirror={false}
+      orientation="left"
+      padding={
+        Object {
+          "bottom": 0,
+          "top": 0,
+        }
+      }
+      reversed={false}
+      scale="auto"
+      tick={false}
+      tickCount={5}
+      tickLine={false}
+      type="number"
+      width={60}
+      yAxisId={0}
+    />
+    <ReferenceLine
+      fill="none"
+      fillOpacity={1}
+      ifOverflow="discard"
+      isFront={false}
+      label={
+        <StatGrade
+          label="god like"
+        />
+      }
+      stroke="#ffffff"
+      strokeOpacity={0.2}
+      strokeWidth={1}
+      xAxisId={0}
+      y={10}
+      yAxisId={0}
+    />
+    <ReferenceLine
+      fill="none"
+      fillOpacity={1}
+      ifOverflow="discard"
+      isFront={false}
+      label={
+        <StatGrade
+          label="epic"
+        />
+      }
+      stroke="#ffffff"
+      strokeOpacity={0.2}
+      strokeWidth={1}
+      xAxisId={0}
+      y={5}
+      yAxisId={0}
+    />
+    <ReferenceLine
+      fill="none"
+      fillOpacity={1}
+      ifOverflow="discard"
+      isFront={false}
+      label={
+        <StatGrade
+          label="average"
+        />
+      }
+      stroke="#ffffff"
+      strokeOpacity={0.2}
+      strokeWidth={1}
+      xAxisId={0}
+      y={0}
+      yAxisId={0}
+    />
+    <ReferenceLine
+      fill="none"
+      fillOpacity={1}
+      ifOverflow="discard"
+      isFront={false}
+      label={
+        <StatGrade
+          label="poor"
+        />
+      }
+      stroke="#ffffff"
+      strokeOpacity={0.2}
+      strokeWidth={1}
+      xAxisId={0}
+      y={-2.5}
+      yAxisId={0}
+    />
+    <ReferenceLine
+      fill="none"
+      fillOpacity={1}
+      ifOverflow="discard"
+      isFront={false}
+      label={
+        <StatGrade
+          label=""
+        />
+      }
+      stroke="#ffffff"
+      strokeOpacity={0.2}
+      strokeWidth={1}
+      xAxisId={0}
+      y={-5}
+      yAxisId={0}
+    />
+    <Bar
+      animationBegin={0}
+      animationDuration={400}
+      animationEasing="ease"
+      data={Array []}
+      dataKey="mod"
+      fill="#ffffff"
+      fillOpacity={0.5}
+      hide={false}
+      isAnimationActive={true}
+      label={<BarLabel />}
+      layout="vertical"
+      legendType="rect"
+      minPointSize={0}
+      onAnimationEnd={[Function]}
+      onAnimationStart={[Function]}
+      stroke={0}
+      xAxisId={0}
+      yAxisId={0}
+    >
+      <LabelList
+        dataKey="value"
+        fill="#ffffff"
+        position="center"
+        valueAccessor={[Function]}
+      />
+    </Bar>
+  </BarChart>
+</ResponsiveContainer>
+`;
+
+exports[`<StatGrade /> renders correctly 1`] = `
+<text
+  fill="#ffffff"
+  fillOpacity={0.5}
+  fontSize={14}
+  textAnchor="end"
+  x={70}
+  y={22}
+>
+  epic
+</text>
+`;
