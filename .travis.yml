@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - "10.5.0"
-
-dist: trusty
-sudo: false
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - yarn coverage
+after_success:
+  - codecov
