@@ -1,6 +1,7 @@
 import * as PropTypes from "prop-types";
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import { rem } from "../utils/helpers";
 
 const sizes = {
@@ -86,7 +87,7 @@ class FilterMonsterBySize extends React.Component {
   render() {
     const { items, active } = this.props;
 
-    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} className={ItemToggle} value={name} onChange={this.handleToggle} />;
+    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} css={ItemToggle} value={name} onChange={this.handleToggle} />;
 
     return (
       <ItemList>
@@ -95,7 +96,7 @@ class FilterMonsterBySize extends React.Component {
           return (
             <li
               key={`filter-${name}`}
-              className={css`
+              css={css`
                 margin-bottom: 0;
               `}
             >

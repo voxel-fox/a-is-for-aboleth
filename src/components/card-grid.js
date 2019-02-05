@@ -2,7 +2,8 @@ import * as PropTypes from "prop-types";
 import React from "react";
 import memoize from "memoize-one";
 
-import styled, { css, keyframes } from "react-emotion";
+import styled from "@emotion/styled";
+import { css, keyframes, jsx } from "@emotion/core";
 import { rem } from "../utils/helpers";
 import { zoomInUp } from "react-animations";
 import InfiniteScroll from "react-infinite-scroller";
@@ -168,7 +169,7 @@ class CardGrid extends React.Component {
 
     return (
       <div
-        className={css`
+        css={css`
           overflow: hidden;
           min-height: 100vh;
           background: url(${texture});
@@ -187,19 +188,12 @@ class CardGrid extends React.Component {
           loader={<div key={0}>Loading &hellip;</div>}
         >
           <Grid
-            className={css`
+            css={css`
               margin-bottom: ${rem(250)};
             `}
           >
             {deck.slice(0, cardLimit).map((card, i) => (
-              <MonsterCard
-                key={`monster-${card.fields.slug}`}
-                className={css`
-                  ${GridItem}
-                  ${i > perPage && animate}
-                `}
-                monster={card}
-              />
+              <MonsterCard key={`monster-${card.fields.slug}`} cssStyles={[GridItem, i > perPage && animate]} monster={card} />
             ))}
           </Grid>
         </InfiniteScroll>
@@ -214,7 +208,7 @@ class CardGrid extends React.Component {
             }}
           >
             <span
-              className={css`
+              css={css`
                 opacity: 0;
                 position: absolute;
               `}
@@ -233,7 +227,7 @@ class CardGrid extends React.Component {
             )}
           </FiltersToggle>
           <div
-            className={css`
+            css={css`
               ${container};
               margin: 0 auto;
             `}
@@ -241,7 +235,7 @@ class CardGrid extends React.Component {
             <FiltersList>
               <label
                 htmlFor="filter-by-name"
-                className={css`
+                css={css`
                   position: absolute;
                   opacity: 0;
                   z-index: -10;
@@ -250,20 +244,21 @@ class CardGrid extends React.Component {
                 Enter a monters name to filter cards
               </label>
               <SearchInput
-                className={css`
+                css={css`
                   max-width: calc(100vw - 3rem);
-                `}
-                inputClassName={css`
-                  background: transparent;
-                  color: white;
-                  border: 0;
-                  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-                  border-radius: 0;
-                  width: ${rem(340)};
-                  max-width: 100%;
-                  padding: 0 ${rem(10)};
-                  margin-bottom: ${rem(20)};
-                  -webkit-appearance: none;
+
+                  input {
+                    background: transparent;
+                    color: white;
+                    border: 0;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+                    border-radius: 0;
+                    width: ${rem(340)};
+                    max-width: 100%;
+                    padding: 0 ${rem(10)};
+                    margin-bottom: ${rem(20)};
+                    -webkit-appearance: none;
+                  }
                 `}
                 placeholder={"Filter By Name"}
                 id={"filter-by-name"}

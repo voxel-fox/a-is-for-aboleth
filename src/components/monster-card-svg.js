@@ -2,7 +2,7 @@ import { string } from "prop-types";
 import React from "react";
 import romanize from "../utils/romanize";
 import { ReactComponent as SVGDefs } from "../assets/symbols.svg";
-import { css } from "react-emotion";
+import { css } from "@emotion/core";
 
 const CreatureSize = ({ size }) => (
   <text fontFamily="Alegreya-Medium,Alegreya" fontSize="11" transform="matrix(.93 0 0 1 17.23 288.32)" textAnchor="middle">
@@ -55,7 +55,7 @@ const CardSVG = ({ size, name, type, cr }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 227.39 338.51"
-    className={css`
+    css={css`
       display: block;
       z-index: 5;
       position: relative;
@@ -75,7 +75,7 @@ const CardSVG = ({ size, name, type, cr }) => (
 
 export const CardSVGdefs = () => (
   <SVGDefs
-    className={css`
+    css={css`
       display: none;
     `}
   />

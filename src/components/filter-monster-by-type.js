@@ -1,6 +1,7 @@
 import * as PropTypes from "prop-types";
 import React from "react";
-import styled, { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import MonsterTypeBadge from "./monster-type-badge";
 import { rem } from "../utils/helpers";
 
@@ -75,7 +76,7 @@ class FilterMonsterByType extends React.Component {
       return isActive ? { fill: "#000" } : { fill: "#999" };
     };
 
-    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} className={ItemToggle} value={name} onChange={this.handleToggle} />;
+    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} css={ItemToggle} value={name} onChange={this.handleToggle} />;
 
     const filterItem = (name, isActive) => (
       <TypeLabel>

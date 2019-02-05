@@ -1,4 +1,4 @@
-import { css } from "react-emotion";
+import { css } from "@emotion/core";
 
 export const rem = px => {
   return `${px / 16}rem`;

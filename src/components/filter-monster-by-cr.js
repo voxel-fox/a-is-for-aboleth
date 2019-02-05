@@ -1,7 +1,7 @@
 import * as PropTypes from "prop-types";
 import React from "react";
 import { Range, createSliderWithTooltip } from "rc-slider";
-import { css } from "react-emotion";
+import { css } from "@emotion/core";
 import { rem } from "../utils/helpers";
 
 import "rc-slider/assets/index.css";
@@ -58,14 +58,14 @@ class FilterMonsterByCR extends React.Component {
 
     return (
       <div
-        className={css`
+        css={css`
           max-width: 100%;
           width: ${rem(340)};
           overflow: visible;
         `}
       >
         <p
-          className={css`
+          css={css`
             text-align: center;
             margin: 0 0 ${rem(-5)} 0;
             color: #999;
@@ -74,7 +74,7 @@ class FilterMonsterByCR extends React.Component {
           <abbr title="Challenge Rating">CR</abbr>: {this.tooltip(min)} - {this.tooltip(max)}
         </p>
         <RangeCustom
-          className={css`
+          css={css`
             margin: ${rem(10)};
             max-width: calc(100% - ${rem(20)});
           `}

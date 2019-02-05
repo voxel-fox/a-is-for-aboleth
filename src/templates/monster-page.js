@@ -1,9 +1,16 @@
 import * as PropTypes from "prop-types";
 import React from "react";
 import { graphql } from "gatsby";
+import { css, Global } from "@emotion/core";
 import Helmet from "react-helmet";
 
 import MonsterDetail from "../components/monster-detail";
+
+const globalStyles = css`
+  body {
+    background: black;
+  }
+`;
 
 class MonsterTemplate extends React.Component {
   static propTypes = {
@@ -21,6 +28,7 @@ class MonsterTemplate extends React.Component {
           <meta name="description" content={`Stats, actions and details for the ${monster.name} a ${monster.cr} CR creature. This monster is typically of a ${monster.alignment} alignment and is ${monster.size} sized.`} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
         </Helmet>
+        <Global styles={globalStyles} />
         <MonsterDetail monster={monster} image={(imageMonster && imageMonster.sharp) || (imageFallback && imageFallback.sharp)} />
       </>
     );

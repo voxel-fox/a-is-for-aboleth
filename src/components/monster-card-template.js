@@ -2,7 +2,8 @@ import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
-import styled, { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import CardSvg from "./monster-card-svg";
 import { rem } from "../utils/helpers";
 import placholder from "../assets/images/unknown-card.svg";
@@ -47,7 +48,7 @@ class MonsterCard extends PureComponent {
 
   render() {
     const {
-      className,
+      cssStyles = [],
       monster: {
         name,
         size,
@@ -61,7 +62,7 @@ class MonsterCard extends PureComponent {
     const image = cardImage && cardImage.childImageSharp;
 
     return (
-      <Link className={`${CardBase} ${className}`} to={`/${slug}/`}>
+      <Link css={[CardBase, ...cssStyles]} to={`/${slug}/`}>
         <CardImage>{image && <Img fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }} />}</CardImage>
         {CardSvg({ name, size, type, cr })}
         <script type="application/ld+json">

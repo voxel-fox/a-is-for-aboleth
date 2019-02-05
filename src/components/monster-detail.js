@@ -1,6 +1,7 @@
 import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import styled, { css } from "react-emotion";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import { ReactComponent as SVGDefs } from "../assets/symbols.svg";
 import { rem } from "../utils/helpers";
 
@@ -147,7 +148,7 @@ class MonsterDetail extends PureComponent {
 
     const MonsterImage = () => (
       <div
-        className={css`
+        css={css`
           position: absolute;
           top: 0;
           left: 0;
@@ -160,7 +161,7 @@ class MonsterDetail extends PureComponent {
     );
     const ActionsList = ({ actions, label }) => (
       <section
-        className={css`
+        css={css`
           margin-bottom: ${rem(48)};
           border-top: 1px solid white;
           padding-top: ${rem(16)};
@@ -173,7 +174,7 @@ class MonsterDetail extends PureComponent {
           {actions.map((action, i) => (
             <ActionCard key={i}>
               <h3
-                className={css`
+                css={css`
                   color: black;
                 `}
               >
@@ -188,13 +189,13 @@ class MonsterDetail extends PureComponent {
 
     const MonsterDetails = () => (
       <article>
-        <Link className={backLink} to="/">
+        <Link css={backLink} to="/">
           <ArrowLeft />
-          <span className={backLinkText}>back</span>
+          <span css={backLinkText}>back</span>
         </Link>
 
         <Mast
-          className={css`
+          css={css`
             object-fit: cover;
           `}
         >
@@ -204,7 +205,7 @@ class MonsterDetail extends PureComponent {
         <Container>
           <ContentBox>
             <div
-              className={css`
+              css={css`
                 ${rail};
                 text-align: center;
               `}
@@ -222,24 +223,24 @@ class MonsterDetail extends PureComponent {
                 iconAttrs={{ fill: "#000" }}
               />
             </div>
-            <div className={primary}>
+            <div css={primary}>
               <h1>{name}</h1>
               <div
-                className={css`
+                css={css`
                   margin: ${rem(15)};
                   padding: ${rem(15)};
                   background-color: #222;
                 `}
               >
                 <h2
-                  className={css`
+                  css={css`
                     font-size: ${rem(18)};
                   `}
                 >
                   <em>{alignment}</em>, <em>{type}</em>
                 </h2>
                 <p
-                  className={css`
+                  css={css`
                     line-height: 1.8;
                   `}
                 >
@@ -251,7 +252,7 @@ class MonsterDetail extends PureComponent {
             </div>
           </ContentBox>
           <ContentBox>
-            <aside className={rail}>
+            <aside css={rail}>
               <InfoCardList>
                 <li>
                   <InfoCardLabel>Creature Type</InfoCardLabel>
@@ -268,7 +269,7 @@ class MonsterDetail extends PureComponent {
               </InfoCardList>
               <section>
                 <h2
-                  className={css`
+                  css={css`
                     text-align: center;
                   `}
                 >
@@ -281,7 +282,7 @@ class MonsterDetail extends PureComponent {
                 </div>
               </section>
             </aside>
-            <div className={primary}>
+            <div css={primary}>
               {monster.actions && <ActionsList actions={monster.actions} label={"Actions"} />}
               {monster.legendary_actions && <ActionsList actions={monster.legendary_actions} label={"Legendary Actions"} />}
               {monster.special_abilities && <ActionsList actions={monster.special_abilities} label={"Special Abilities"} />}
@@ -289,7 +290,7 @@ class MonsterDetail extends PureComponent {
           </ContentBox>
         </Container>
         <SVGDefs
-          className={css`
+          css={css`
             display: none;
           `}
         />

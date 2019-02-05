@@ -1,6 +1,6 @@
 import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { css } from "react-emotion";
+import { css } from "@emotion/core";
 import statMod from "../utils/stat-mod";
 
 const statRowStyle = css`
@@ -26,12 +26,12 @@ class MonsterStatList extends PureComponent {
 
     const StatRow = ({ stat: { value, label, attr } }) => {
       return (
-        <div className={statRowStyle}>
+        <div css={statRowStyle}>
           <dt>
             <abbr title={attr}>{label}</abbr>
           </dt>
           <dd
-            className={css`
+            css={css`
               margin: 0;
               font-size: 1.2em;
             `}
@@ -39,7 +39,7 @@ class MonsterStatList extends PureComponent {
             {value}
           </dd>
           <dd
-            className={css`
+            css={css`
               margin: 0;
             `}
           >
@@ -51,7 +51,7 @@ class MonsterStatList extends PureComponent {
 
     return (
       <dl
-        className={css`
+        css={css`
           display: flex;
           width: 300px;
           justify-content: center;
