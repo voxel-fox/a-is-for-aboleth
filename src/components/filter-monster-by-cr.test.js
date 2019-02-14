@@ -3,6 +3,7 @@ import {
   FilterMonsterByCR,
   toolTipFormat
 } from "./filter-monster-by-cr";
+import { act } from "react-dom/test-utils";
 
 import { Range } from "rc-slider";
 
@@ -38,7 +39,9 @@ describe("<FilterMonsterByCR />", () => {
     const onValueChange = sinon.spy();
     const wrapper = mount(<FilterMonsterByCR onValueChange={onValueChange} />);
     const onChange = wrapper.find(Range).prop("onChange");
-    onChange([1, 33]);
+    act(() => {
+      onChange([1, 33]);
+    });
     expect(
       onValueChange.calledOnceWith({
         min: 0.125,
