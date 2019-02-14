@@ -24,12 +24,16 @@ class Index extends React.Component {
     const { monsters } = this.props.data;
 
     const title = `"A" is for Aboleth`;
-    const desc = "A D&D 5e beasteiray of monster stats and abilities for quick reference and fun.";
+    const desc =
+      "A D&D 5e beasteiray of monster stats and abilities for quick reference and fun.";
 
     return (
       <>
         <Helmet title={title}>
-          <meta name="google-site-verification" content="ZVvgrDxauwoLid_aeqLUxbNGwQNYF8FLKxcjMFlJSWA" />
+          <meta
+            name="google-site-verification"
+            content="ZVvgrDxauwoLid_aeqLUxbNGwQNYF8FLKxcjMFlJSWA"
+          />
           <meta name="description" content={desc} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
         </Helmet>

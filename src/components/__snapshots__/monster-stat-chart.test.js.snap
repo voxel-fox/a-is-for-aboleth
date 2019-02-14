@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StatChart /> renders correctly 1`] = `
+<dl
+  css={
+    Object {
+      "name": "1m0avwd-statListStyle",
+      "styles": "display:flex;width:300px;justify-content:center;label:statListStyle;",
+    }
+  }
+>
+  <StatRow
+    key="STR"
+    stat={
+      Object {
+        "attr": "Strength",
+        "label": "STR",
+        "value": 11,
+      }
+    }
+  />
+  <StatRow
+    key="DEX"
+    stat={
+      Object {
+        "attr": "Dexterity",
+        "label": "DEX",
+        "value": 13,
+      }
+    }
+  />
+</dl>
+`;

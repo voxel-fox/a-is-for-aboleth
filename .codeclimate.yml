@@ -1,0 +1,9 @@
+version: "2" # required to adjust maintainability checks
+exclude_patterns:
+  - ".cache/"
+  - "data/"
+  - "public/"
+  - "**/node_modules/"
+  - "**/vendor/"
+  - "**/*test.js"
+  - "**/*spec.js"

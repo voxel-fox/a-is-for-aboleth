@@ -10,7 +10,48 @@ const statRowStyle = css`
   margin: 0 0.5rem;
 `;
 
-class MonsterStatList extends PureComponent {
+const statValueStyle = css`
+  margin: 0;
+  font-size: 1.2em;
+`;
+
+const statModStyle = css`
+  margin: 0;
+`;
+
+export class StatRow extends PureComponent {
+  static propTypes = {
+    stat: PropTypes.shape({
+      attr: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired
+    })
+  };
+
+  render() {
+    const {
+      stat: { value, label, attr }
+    } = this.props;
+
+    return (
+      <div css={statRowStyle}>
+        <dt>
+          <abbr title={attr}>{label}</abbr>
+        </dt>
+        <dd css={statValueStyle}>{value}</dd>
+        <dd css={statModStyle}>{statMod(value)}</dd>
+      </div>
+    );
+  }
+}
+
+const statListStyle = css`
+  display: flex;
+  width: 300px;
+  justify-content: center;
+`;
+
+export class MonsterStatList extends PureComponent {
   static propTypes = {
     data: PropTypes.arrayOf(
       PropTypes.shape({
@@ -24,39 +65,8 @@ class MonsterStatList extends PureComponent {
   render() {
     const { data } = this.props;
 
-    const StatRow = ({ stat: { value, label, attr } }) => {
-      return (
-        <div css={statRowStyle}>
-          <dt>
-            <abbr title={attr}>{label}</abbr>
-          </dt>
-          <dd
-            css={css`
-              margin: 0;
-              font-size: 1.2em;
-            `}
-          >
-            {value}
-          </dd>
-          <dd
-            css={css`
-              margin: 0;
-            `}
-          >
-            {statMod(value)}
-          </dd>
-        </div>
-      );
-    };
-
     return (
-      <dl
-        css={css`
-          display: flex;
-          width: 300px;
-          justify-content: center;
-        `}
-      >
+      <dl css={statListStyle}>
         {data.map(attr => (
           <StatRow key={attr.label} stat={attr} />
         ))}

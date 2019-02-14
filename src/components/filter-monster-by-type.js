@@ -9,7 +9,13 @@ const ListBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(77, 77, 77, 0.8) 27.5%, rgba(77, 77, 77, 0.8) 82.5%, rgba(0, 0, 0, 0) 100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(77, 77, 77, 0.8) 27.5%,
+    rgba(77, 77, 77, 0.8) 82.5%,
+    rgba(0, 0, 0, 0) 100%
+  );
 `;
 
 const ItemList = styled.ul`
@@ -50,7 +56,22 @@ class FilterMonsterByType extends React.Component {
   };
 
   static defaultProps = {
-    items: ["Aberration", "Beast", "Celestial", "Construct", "Dragon", "Elemental", "Fey", "Fiend", "Giant", "Humanoid", "Monstrosity", "Ooze", "Plant", "Undead"],
+    items: [
+      "Aberration",
+      "Beast",
+      "Celestial",
+      "Construct",
+      "Dragon",
+      "Elemental",
+      "Fey",
+      "Fiend",
+      "Giant",
+      "Humanoid",
+      "Monstrosity",
+      "Ooze",
+      "Plant",
+      "Undead"
+    ],
     active: []
   };
 
@@ -70,18 +91,33 @@ class FilterMonsterByType extends React.Component {
     const { items, active } = this.props;
 
     const bgStyle = isActive => {
-      return isActive ? { stroke: "none", fill: "#fff" } : { stroke: "#111", fill: "none" };
+      return isActive
+        ? { stroke: "none", fill: "#fff" }
+        : { stroke: "#111", fill: "none" };
     };
     const iconStyle = isActive => {
       return isActive ? { fill: "#000" } : { fill: "#999" };
     };
 
-    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} css={ItemToggle} value={name} onChange={this.handleToggle} />;
+    const filterInputToggle = (name, isActive) => (
+      <input
+        type="checkbox"
+        checked={isActive}
+        css={ItemToggle}
+        value={name}
+        onChange={this.handleToggle}
+      />
+    );
 
     const filterItem = (name, isActive) => (
       <TypeLabel>
         {filterInputToggle(name, isActive)}
-        <MonsterTypeBadge type={name.toLowerCase()} svgAttrs={{ width: "100%" }} bgAttrs={bgStyle(isActive)} iconAttrs={iconStyle(isActive)} />
+        <MonsterTypeBadge
+          type={name.toLowerCase()}
+          svgAttrs={{ width: "100%" }}
+          bgAttrs={bgStyle(isActive)}
+          iconAttrs={iconStyle(isActive)}
+        />
         {name}
       </TypeLabel>
     );

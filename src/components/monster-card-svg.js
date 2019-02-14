@@ -5,23 +5,46 @@ import { ReactComponent as SVGDefs } from "../assets/symbols.svg";
 import { css } from "@emotion/core";
 
 const CreatureSize = ({ size }) => (
-  <text fontFamily="Alegreya-Medium,Alegreya" fontSize="11" transform="matrix(.93 0 0 1 17.23 288.32)" textAnchor="middle">
+  <text
+    fontFamily="Alegreya-Medium,Alegreya"
+    fontSize="11"
+    transform="matrix(.93 0 0 1 17.23 288.32)"
+    textAnchor="middle"
+  >
     {size.charAt(0)}
   </text>
 );
 
 const CreatureName = ({ name }) => (
-  <text fontFamily="Alegreya-Regular,Alegreya" fontSize="20" x="50%" transform="translate(0 319.07)" textAnchor="middle">
+  <text
+    fontFamily="Alegreya-Regular,Alegreya"
+    fontSize="20"
+    x="50%"
+    transform="translate(0 319.07)"
+    textAnchor="middle"
+  >
     {name}
   </text>
 );
 
 const FractionCR = ({ rating }) => (
-  <g fontFamily="Alegreya-Medium,Alegreya" textAnchor="middle" fill="#fff" x="50%" y="6.5%">
+  <g
+    fontFamily="Alegreya-Medium,Alegreya"
+    textAnchor="middle"
+    fill="#fff"
+    x="50%"
+    y="6.5%"
+  >
     <text fontSize="11.24262" x="50%" y="13" textAnchor="middle">
       I
     </text>
-    <path fill="none" stroke="#fff" strokeMiterlimit="10" strokeWidth=".5" d="M101.8 15.49h24.83" />
+    <path
+      fill="none"
+      stroke="#fff"
+      strokeMiterlimit="10"
+      strokeWidth=".5"
+      d="M101.8 15.49h24.83"
+    />
     <text fontSize="12.65193" x="50%" y="28" textAnchor="middle">
       {romanize(rating.split("/").pop())}
     </text>
@@ -29,15 +52,34 @@ const FractionCR = ({ rating }) => (
 );
 
 const WholeNumberCR = ({ rating }) => (
-  <text fontFamily="Alegreya-Medium,Alegreya" fontSize="20.67" fill="#fff" x="50%" y="6.5%" textAnchor="middle">
+  <text
+    fontFamily="Alegreya-Medium,Alegreya"
+    fontSize="20.67"
+    fill="#fff"
+    x="50%"
+    y="6.5%"
+    textAnchor="middle"
+  >
     {romanize(rating)}
   </text>
 );
 
 const ZeroCR = () => (
   <>
-    <path fill="none" stroke="#fff" strokeMiterlimit="10" d="M111 20.78l6.56-8.56" />
-    <text fontFamily="Alegreya-Medium,Alegreya" x="50%" y="25" textAnchor="middle" fontSize="28" fill="#fff">
+    <path
+      fill="none"
+      stroke="#fff"
+      strokeMiterlimit="10"
+      d="M111 20.78l6.56-8.56"
+    />
+    <text
+      fontFamily="Alegreya-Medium,Alegreya"
+      x="50%"
+      y="25"
+      textAnchor="middle"
+      fontSize="28"
+      fill="#fff"
+    >
       O
     </text>
   </>

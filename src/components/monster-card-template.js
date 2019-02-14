@@ -63,7 +63,13 @@ class MonsterCard extends PureComponent {
 
     return (
       <Link css={[CardBase, ...cssStyles]} to={`/${slug}/`}>
-        <CardImage>{image && <Img fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }} />}</CardImage>
+        <CardImage>
+          {image && (
+            <Img
+              fluid={{ ...image.fluid, base64: null, tracedSVG: placholder }}
+            />
+          )}
+        </CardImage>
         {CardSvg({ name, size, type, cr })}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -89,7 +95,12 @@ export default MonsterCard;
 
 export const monsterCardFragment = graphql`
   fragment MonsterCard_img on ImageSharp {
-    fluid: fluid(maxWidth: 380, maxHeight: 550, quality: 80, duotone: { highlight: "#e9d7be", shadow: "#514b36", opacity: 80 }) {
+    fluid: fluid(
+      maxWidth: 380
+      maxHeight: 550
+      quality: 80
+      duotone: { highlight: "#e9d7be", shadow: "#514b36", opacity: 80 }
+    ) {
       ...GatsbyImageSharpFluid_withWebp
     }
   }

@@ -142,9 +142,28 @@ class MonsterDetail extends PureComponent {
 
   render() {
     const { image } = this.props;
-    const { name, size, type, alignment, hp, str, dex, con, int, wis, cha } = this.props.monster;
+    const {
+      name,
+      size,
+      type,
+      alignment,
+      hp,
+      str,
+      dex,
+      con,
+      int,
+      wis,
+      cha
+    } = this.props.monster;
     const { monster } = this.props;
-    const stats = [{ attr: "Strength", label: "STR", value: str }, { attr: "Dexterity", label: "DEX", value: dex }, { attr: "Constitution", label: "CON", value: con }, { attr: "Intelligence", label: "INT", value: int }, { attr: "Wisdom", label: "WIS", value: wis }, { attr: "Charisma", label: "CHA", value: cha }];
+    const stats = [
+      { attr: "Strength", label: "STR", value: str },
+      { attr: "Dexterity", label: "DEX", value: dex },
+      { attr: "Constitution", label: "CON", value: con },
+      { attr: "Intelligence", label: "INT", value: int },
+      { attr: "Wisdom", label: "WIS", value: wis },
+      { attr: "Charisma", label: "CHA", value: cha }
+    ];
 
     const MonsterImage = () => (
       <div
@@ -244,7 +263,8 @@ class MonsterDetail extends PureComponent {
                     line-height: 1.8;
                   `}
                 >
-                  One day hastily scrawled field notes, and tomes filled with tales may be written about this creature.
+                  One day hastily scrawled field notes, and tomes filled with
+                  tales may be written about this creature.
                   <br />
                   But for now&hellip; here is all we know.
                 </p>
@@ -283,9 +303,21 @@ class MonsterDetail extends PureComponent {
               </section>
             </aside>
             <div css={primary}>
-              {monster.actions && <ActionsList actions={monster.actions} label={"Actions"} />}
-              {monster.legendary_actions && <ActionsList actions={monster.legendary_actions} label={"Legendary Actions"} />}
-              {monster.special_abilities && <ActionsList actions={monster.special_abilities} label={"Special Abilities"} />}
+              {monster.actions && (
+                <ActionsList actions={monster.actions} label={"Actions"} />
+              )}
+              {monster.legendary_actions && (
+                <ActionsList
+                  actions={monster.legendary_actions}
+                  label={"Legendary Actions"}
+                />
+              )}
+              {monster.special_abilities && (
+                <ActionsList
+                  actions={monster.special_abilities}
+                  label={"Special Abilities"}
+                />
+              )}
             </div>
           </ContentBox>
         </Container>
