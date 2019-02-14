@@ -1,4 +1,9 @@
-import { BarLabel, StatGrade, getModifers, default as StatBarChart } from "./monster-stat-barchart";
+import {
+  BarLabel,
+  StatGrade,
+  getModifers,
+  default as StatBarChart
+} from "./monster-stat-barchart";
 
 describe("getModifers", () => {
   const stats = [

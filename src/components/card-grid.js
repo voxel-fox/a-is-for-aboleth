@@ -127,20 +127,27 @@ class CardGrid extends React.Component {
 
   filterByAttr = memoize((card, filters, attr) => {
     const allowed = filters.map(v => v.toLowerCase());
-    return allowed.length < 1 || (card[attr] && allowed.includes(card[attr].toLowerCase()));
+    return (
+      allowed.length < 1 ||
+      (card[attr] && allowed.includes(card[attr].toLowerCase()))
+    );
   });
 
   filterByCR = memoize((card, crRange) => {
-    return card.fields.crValue >= crRange.min && card.fields.crValue <= crRange.max;
+    return (
+      card.fields.crValue >= crRange.min && card.fields.crValue <= crRange.max
+    );
   });
 
-  filterCards = memoize((cards, sizeFilters, typeFilters, crRange, nameFilter) => {
-    return cards
-      .filter(createFilter(nameFilter, ["name"]))
-      .filter(card => this.filterByAttr(card, sizeFilters, "size"))
-      .filter(card => this.filterByAttr(card, typeFilters, "type"))
-      .filter(card => this.filterByCR(card, crRange));
-  });
+  filterCards = memoize(
+    (cards, sizeFilters, typeFilters, crRange, nameFilter) => {
+      return cards
+        .filter(createFilter(nameFilter, ["name"]))
+        .filter(card => this.filterByAttr(card, sizeFilters, "size"))
+        .filter(card => this.filterByAttr(card, typeFilters, "type"))
+        .filter(card => this.filterByCR(card, crRange));
+    }
+  );
 
   toggleFilter(...args) {
     const [{ name, active }, filterType] = args;
@@ -164,8 +171,21 @@ class CardGrid extends React.Component {
 
   render() {
     const { cards, perPage } = this.props;
-    const { sizeFilters, typeFilters, crRange, cardLimit, nameFilter, showFilters } = this.state;
-    const deck = this.filterCards(cards, sizeFilters, typeFilters, crRange, nameFilter);
+    const {
+      sizeFilters,
+      typeFilters,
+      crRange,
+      cardLimit,
+      nameFilter,
+      showFilters
+    } = this.state;
+    const deck = this.filterCards(
+      cards,
+      sizeFilters,
+      typeFilters,
+      crRange,
+      nameFilter
+    );
 
     return (
       <div
@@ -193,7 +213,11 @@ class CardGrid extends React.Component {
             `}
           >
             {deck.slice(0, cardLimit).map((card, i) => (
-              <MonsterCard key={`monster-${card.fields.slug}`} cssStyles={[GridItem, i > perPage && animate]} monster={card} />
+              <MonsterCard
+                key={`monster-${card.fields.slug}`}
+                cssStyles={[GridItem, i > perPage && animate]}
+                monster={card}
+              />
             ))}
           </Grid>
         </InfiniteScroll>
@@ -276,10 +300,20 @@ class CardGrid extends React.Component {
                   });
                 }}
               />
-              <FilterMonsterBySize active={sizeFilters || []} onHandleToggle={(...args) => this.toggleFilter(...args, "sizeFilters")} />
+              <FilterMonsterBySize
+                active={sizeFilters || []}
+                onHandleToggle={(...args) =>
+                  this.toggleFilter(...args, "sizeFilters")
+                }
+              />
             </FiltersList>
           </div>
-          <FilterMonsterByType active={typeFilters || []} onHandleToggle={(...args) => this.toggleFilter(...args, "typeFilters")} />
+          <FilterMonsterByType
+            active={typeFilters || []}
+            onHandleToggle={(...args) =>
+              this.toggleFilter(...args, "typeFilters")
+            }
+          />
         </FiltersBox>
         <CardSVGdefs />
       </div>

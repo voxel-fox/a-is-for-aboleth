@@ -87,7 +87,15 @@ class FilterMonsterBySize extends React.Component {
   render() {
     const { items, active } = this.props;
 
-    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} css={ItemToggle} value={name} onChange={this.handleToggle} />;
+    const filterInputToggle = (name, isActive) => (
+      <input
+        type="checkbox"
+        checked={isActive}
+        css={ItemToggle}
+        value={name}
+        onChange={this.handleToggle}
+      />
+    );
 
     return (
       <ItemList>

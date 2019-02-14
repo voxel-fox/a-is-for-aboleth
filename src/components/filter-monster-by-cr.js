@@ -71,7 +71,8 @@ class FilterMonsterByCR extends React.Component {
             color: #999;
           `}
         >
-          <abbr title="Challenge Rating">CR</abbr>: {this.tooltip(min)} - {this.tooltip(max)}
+          <abbr title="Challenge Rating">CR</abbr>: {this.tooltip(min)} -{" "}
+          {this.tooltip(max)}
         </p>
         <RangeCustom
           css={css`
