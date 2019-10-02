@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MonsterTypeBadge /> renders correctly 1`] = `
+<svg
+  data-creature-type="monster-type"
+  svgAttr="svgProp"
+  svgAttr2="svgProp2"
+  viewBox="0 0 31.5 31.5"
+  x="10.5"
+  y="9"
+>
+  <circle
+    bgAttrs="bgProp"
+    bgAttrs2="bgProp2"
+    cx="15.75"
+    cy="15.75"
+    fill="#fff"
+    r="15.25"
+    stroke="#000"
+    strokeMiterlimit="10"
+  />
+  <use
+    fill="#000"
+    iconAttrs="iconProp"
+    iconAttrs2="iconProp2"
+    xlinkHref="#monster-type"
+  />
+</svg>
+`;

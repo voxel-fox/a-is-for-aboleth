@@ -1,15 +1,16 @@
-import * as PropTypes from 'prop-types'
-import React from 'react'
-import styled, { css } from 'react-emotion'
-import MonsterTypeBadge from './monster-type-badge'
-import { rem } from '../utils/helpers'
+import * as PropTypes from "prop-types";
+import React from "react";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
+import MonsterTypeBadge from "./monster-type-badge";
+import { rem } from "../utils/helpers";
 
 const ListBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(90deg, rgba(0,0,0,0.00) 0%, rgba(77,77,77,0.80) 27.5%, rgba(77,77,77,0.80) 82.5%, rgba(0,0,0,0.00) 100%);
-`
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(77, 77, 77, 0.8) 27.5%, rgba(77, 77, 77, 0.8) 82.5%, rgba(0, 0, 0, 0) 100%);
+`;
 
 const ItemList = styled.ul`
   display: flex;
@@ -25,13 +26,13 @@ const ItemList = styled.ul`
     padding-left: ${rem(80)};
     padding-right: ${rem(80)};
   }
-`
+`;
 
 const ItemToggle = css`
   position: absolute;
   opacity: 0;
   z-index: -1;
-`
+`;
 
 const TypeLabel = styled.label`
   display: block;
@@ -39,99 +40,63 @@ const TypeLabel = styled.label`
   height: ${rem(115)};
   margin: 0 ${rem(8)};
   text-align: center;
-`
+`;
 
 class FilterMonsterByType extends React.Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.string),
     active: PropTypes.arrayOf(PropTypes.string),
     onHandleToggle: PropTypes.func
-  }
+  };
 
   static defaultProps = {
-    items: [
-      'Aberration',
-      'Beast',
-      'Celestial',
-      'Construct',
-      'Dragon',
-      'Elemental',
-      'Fey',
-      'Fiend',
-      'Giant',
-      'Humanoid',
-      'Monstrosity',
-      'Ooze',
-      'Plant',
-      'Undead'
-    ],
+    items: ["Aberration", "Beast", "Celestial", "Construct", "Dragon", "Elemental", "Fey", "Fiend", "Giant", "Humanoid", "Monstrosity", "Ooze", "Plant", "Undead"],
     active: []
+  };
+
+  constructor(props) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  constructor (props) {
-    super(props)
-    this.handleToggle = this.handleToggle.bind(this)
-  }
-
-  handleToggle (e) {
+  handleToggle(e) {
     this.props.onHandleToggle({
-      'name': e.target.value,
-      'active': e.target.checked
-    })
+      name: e.target.value,
+      active: e.target.checked
+    });
   }
 
-  render () {
-    const { items, active } = this.props
+  render() {
+    const { items, active } = this.props;
 
-    const bgStyle = (isActive) => {
-      return isActive
-        ? { stroke: 'none', fill: '#fff' }
-        : { stroke: '#111', fill: 'none' }
-    }
-    const iconStyle = (isActive) => {
-      return isActive
-        ? { fill: '#000' }
-        : { fill: '#999' }
-    }
+    const bgStyle = isActive => {
+      return isActive ? { stroke: "none", fill: "#fff" } : { stroke: "#111", fill: "none" };
+    };
+    const iconStyle = isActive => {
+      return isActive ? { fill: "#000" } : { fill: "#999" };
+    };
 
-    const filterInputToggle = (name, isActive) => (
-      <input
-        type='checkbox'
-        checked={isActive}
-        className={ItemToggle}
-        value={name}
-        onChange={this.handleToggle}
-      />
-    )
+    const filterInputToggle = (name, isActive) => <input type="checkbox" checked={isActive} css={ItemToggle} value={name} onChange={this.handleToggle} />;
 
     const filterItem = (name, isActive) => (
       <TypeLabel>
         {filterInputToggle(name, isActive)}
-        <MonsterTypeBadge
-          type={name.toLowerCase()}
-          svgAttrs={{ width: '100%' }}
-          bgAttrs={bgStyle(isActive)}
-          iconAttrs={iconStyle(isActive)}
-        />
+        <MonsterTypeBadge type={name.toLowerCase()} svgAttrs={{ width: "100%" }} bgAttrs={bgStyle(isActive)} iconAttrs={iconStyle(isActive)} />
         {name}
       </TypeLabel>
-    )
+    );
 
     return (
       <ListBox>
         <ItemList>
-          {items.map((name) => {
-            const isActive = active.indexOf(name) !== -1
-            return (
-              <li key={`filter-${name}`}>
-                {filterItem(name, isActive)}
-              </li>
-            )
+          {items.map(name => {
+            const isActive = active.indexOf(name) !== -1;
+            return <li key={`filter-${name}`}>{filterItem(name, isActive)}</li>;
           })}
         </ItemList>
       </ListBox>
-    )
+    );
   }
 }
 
-export default FilterMonsterByType
+export default FilterMonsterByType;
